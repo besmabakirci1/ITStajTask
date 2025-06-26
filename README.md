@@ -152,3 +152,171 @@ def greet(name):
 
 
 Yazılım tasarım örüntüleri, yazılım tasarımı sırasında sıkça karşılaşılan, birbirine benzer sorunları çözmek için geliştirilmiş ve işlerliği kanıtlanmış genel çözüm önerileridir. Genel olarak yazılım tasarım örüntüleri programlama dillerinden bağımsız olarak tanımlansalar da, nesneye yönelimli programlama dillerine uygun yazılım tasarım örüntüleri daha çok bilinir. Bu örüntüler, nesneler ve sınıflar arasındaki ilişkileri ve etkileşimleri gösterirler. Programcı bir tasarım örüntüsünü elindeki soruna bakarak özelleştirip kullanabilir.
+
+
+________________________
+1. Magic Methods & Dunder (__dunder__)
+Ne?
+Python’un sınıf davranışlarını (operatör aşırı yükleme, built-in fonksiyon çağrıları, iterable/yönetici protokolleri vb.) özelleştirmenizi sağlayan özel yöntemler.
+
+Neden?
+
+Kodunuzu Python’un yerleşik tipleriyle aynı sezgisellikle kullanmak için
+
+v1 + v2, print(obj), len(obj), obj() gibi ifadeleri kendi sınıfınıza taşımak için
+
+Nasıl?
+
+python
+Copy
+Edit
+class Vector:
+    def __init__(self, x, y):           # Oluşturma
+        self.x, self.y = x, y
+
+    def __add__(self, other):           # +
+        return Vector(self.x + other.x,
+                      self.y + other.y)
+
+    def __repr__(self):                 # repr() / REPL
+        return f"Vector({self.x}, {self.y})"
+
+    def __call__(self):                 # obj()
+        print("Hello! I was called!")
+Gibi metodları tanımlayıp, Python’un “data model” protokollerini takip edersiniz.
+
+2. Tasarım Desenleri (Design Patterns) ve Vector Örneği
+Decorator Pattern (OOP):
+
+Amaç: Bir nesnenin davranışını dinamik olarak “etiketlemek” (wrap), alt sınıf oluşturmadan sorumluluk eklemek/çıkarabilmek.
+
+GoF Şablonu: Component ← Decorator ← ConcreteDecorator
+
+Python Karşılığı:
+
+mydecorator(func) → wrapper içindeki ek davranış → func(*args, **kwargs)
+
+Adım adım @mydecorator ile fonksiyonu sararsınız.
+
+Adapter, Strategy, Command, Factory gibi diğer desenleri Vector örneğine uyarlayarak gösterdik:
+
+Adapter: Magic methods (__add__, __repr__, __call__) ile Python operatörlerini sınıfınıza adapte etmek.
+
+Strategy: Farklı toplama algoritmalarını (standard_add, mod_add) add(self, other, strategy=…) ile seçtirmek.
+
+Command: __call__ metoduyla bir nesneyi “komut” gibi kullanmak.
+
+Factory Method: VectorFactory.from_tuple(...), VectorFactory.from_polar(...) gibi statik üreticilerle nesne yaratımı soyutlamak.
+
+3. Python Decorators
+Ne?
+Bir fonksiyonu başka bir fonksiyonla “sarmak” (wrap) suretiyle giriş/çıkış veya yan etki davranışları ekleyen dil seviyesi kolaylık.
+
+Neden?
+
+Tek Sorumluluk Prensibi: Logging, yetkilendirme, önbellekleme gibi çapraz kesen özellikleri fonksiyondan ayırmak.
+
+Açık/Kapalı Prensibi: Orijinal fonksiyonu değiştirmeden yeni davranış eklemek.
+
+Nasıl?
+
+python
+Copy
+Edit
+def mydecorator(func):
+    def wrapper(*args, **kwargs):
+        print("Önce bu yazı gelir")
+        result = func(*args, **kwargs)
+        print("Sonra bu yazı gelir")
+        return result
+    return wrapper
+
+@mydecorator
+def hello(name):
+    print(f"Hello, {name}")
+Örnekler:
+
+Basic (@mydecorator)
+
+Parametreli (@repeat(3))
+
+Logging (@logged) → print + logfile.txt kaydı
+
+Timing (@timed) → time.time() kullanarak süre ölçümü
+
+Neden *args, **kwargs?
+Wrapper’ın orijinal fonksiyonun her tür pozisyonel ve keyword argümanını eksiksiz iletmesi için.
+
+4. Generators
+Ne?
+yield anahtar kelimesiyle lazy execution sağlayan, ihtiyaç duyulduğunda tek tek değer üreten fonksiyonlar.
+
+Neden?
+
+Bellek Verimliliği: Büyük veya sonsuz dizileri bir kerede değil, gerektiğinde üretmek.
+
+Basitlik: Klasik iterator metotları yerine yield ile kısa ve okunaklı kod.
+
+Nasıl?
+
+python
+Copy
+Edit
+def my_generator(n):
+    for i in range(1, n+1):
+        yield i**3
+
+gen = my_generator(9_000_000)
+print(next(gen))  # 1
+print(sys.getsizeof(gen))  # ~112 bayt (sabit)
+for cube in gen: print(cube)
+sys.getsizeof ile Gösterim:
+Generator objesinin çok küçük bir “overhead” tuttuğunu, listeye göre milyarlarca kat bellek tasarrufu sağladığını kanıtlamak için kullanılır.
+
+5. Komut Satırı Argümanları
+sys.argv:
+
+Liste halinde tüm komut satırı parametreleri.
+
+sys.argv[0] → betik adı,
+
+sys.argv[1:] → sizin verdiğiniz argümanlar.
+
+Basit Kullanım:
+
+python
+Copy
+Edit
+filename = sys.argv[1]
+message  = sys.argv[2]
+with open(filename,'w+') as f:
+    f.write(message)
+Bayraklar (Flags) ile:
+
+Kısa (-f, -m) ve uzun (--filename=, --message=) seçenekleri
+
+getopt.getopt() ile ayrıştırmak:
+
+python
+Copy
+Edit
+import getopt
+opts, args = getopt.getopt(
+    sys.argv[1:], 
+    "f:m:", 
+    ["filename=", "message="]
+)
+for opt, val in opts:
+    if opt in ("-f","--filename"): filename = val
+    if opt in ("-m","--message"):  message  = val
+Neden argparse?
+Daha karmaşık bayrak setleri, zorunlu/opsiyonel argümanlar, otomatik yardım (-h/--help) üretmek için argparse modülü tercih edilir.
+
+
+Encapsulation (Kapsülleme) ve Data Hiding (Veri Gizleme)
+
+Kapsülleme nedir?
+Bir sınıfın içindeki verileri ve onları işleyen metotları bir arada tutma prensibidir. Böylece nesne sahibi (caller) sadece “kamuya açık” metotlarla (public API) etkileşime girer, iç yapının detaylarını bilmek zorunda kalmaz.
+
+Veri gizleme (data hiding) nedir?
+Sınıf içinde kullandığınız bazı özniteliklerin (attributes) doğrudan dışarıdan okunmasını/yazılmasını engelleme tekniğidir. Python’da bunun en yaygın yolu, öznitelik adının başına çift alt tire (__) koymaktır. Bu, isim mangling (isim çarpıtma) yoluyla dışarıdan erişimi zorlaştırır.
