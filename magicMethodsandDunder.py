@@ -1,6 +1,12 @@
 #advanced Python Tutorial 0.1
 # https://docs.python.org/3/tutorial/classes.html
-
+## Python’da Magic Methods (özel yöntemler) veya Dunder Methods (“double underscore” – Çift Alt Tireli yöntemler) dediğimiz,
+##  __init__, __add__, __repr__ gibi, sınıflarınızın yerleşik Python davranışlarını(operatörleri, built-in fonksiyonları, nesne yaşam döngüsünü vb.) 
+## özelleştirmenizi sağlayan yöntemlerdir.
+## Dunder, Python yorumlayıcısına “Bu, özel bir protokol yöntemidir; bir davranışı yeniden tanımlamak için kullan.” mesajı verir.
+## 
+## 
+## 
 
 class Vector:
     """
