@@ -1,62 +1,95 @@
-# ITStajTask
-1. m3 macbook pro Apple silicon içine sanal makine kurulumu (VirtualBox)
-Debian (ARM 64-bit) tercih edildi 
-Chatgpt kullanıldı : https://chatgpt.com/share/685aa279-9c50-800e-aba7-1a678d55750b
+**Selamlar 🌷**
 
+Bu README, birinci adım olarak MacBook Pro M3 (Apple Silicon) üzerinde sanal makine kurulumu ve ardından Python'da ileri seviye kavramları öğrenme akışını kronolojik sırayla sunar. Her bölümde ilgili kod bloklarının ne işe yaradığını, nasıl çalıştığını aşamalı olarak açıklayan notlar yer almaktadır.
 
-🔮 Magic Methods (sihirli metodlar)
+---
 
-🧩 Tasarım Desenleri (Design Patterns)
+## İçindekiler
 
-🌀 Generator’lar (lazy execution)
+| Bölüm | Konu                                              |
+| :---: | :------------------------------------------------ |
+|  1.0  | Sanal Makine Kurulumu (VirtualBox + Debian ARM64) |
+|  2.0  | Magic Methods (Dunder Metotlar)                   |
+|  3.0  | Decorator’lar                                     |
+|  4.0  | Tasarım Desenleri (Design Patterns)               |
+|  5.0  | Generator’lar                                     |
+|  6.0  | Komut Satırı Argümanları                          |
+|  7.0  | Kapsülleme & Veri Gizleme                         |
+|  8.0  | Type Hinting                                      |
+|  9.0  | Detaylı Tasarım Desenleri                         |
 
-🛠️ Komut Satırı Argümanları (sys.argv, argparse)
+---
 
-🛡️ Kapsülleme & Veri Gizleme
+## 1.0 Geliştirme Ortamı Kurulumu
 
-1️⃣ Vector Sınıfı 🐍
+**Adım 1:** VirtualBox indirme ve kurulum
 
-2 boyutlu vektörler oluşturun, toplayın ve okunabilir çıktı alın.
+```bash
+# https://www.virtualbox.org adresinden macOS sürümünü indirip kurun.
+```
 
+> **Açıklama:** VirtualBox, Apple Silicon destekli ön sürümleriyle ARM64 tabanlı VM oluşturmanızı sağlar.
+
+**Adım 2:** Debian ARM64 ISO hazırlama
+
+```bash
+# Debian ARM64 ISO dosyasını https://www.debian.org/ARM64 adresinden indirin.
+```
+
+> **Açıklama:** ARM64 dağıtımı, M3 çiple uyumlu çalışır.
+
+**Adım 3:** Yeni VM oluşturma ve ayarlar
+
+| Öğe             | Değer                       |
+| --------------- | --------------------------- |
+| İşletim Sistemi | Debian (Linux / ARM 64-bit) |
+| Bellek (RAM)    | 4 GB veya üstü              |
+| Depolama        | 20 GB VDI                   |
+| Ağ Adaptörü     | NAT veya Bridge             |
+
+> **Açıklama:** Bellek ve depolama, derleme süreçleri için yeterli olmalıdır.
+
+---
+
+## 2.0 Magic Methods (Dunder Metotlar)
+
+Python sınıflarının özel davranışlarını tanımlayan çift alt çizgiyle başlayan metotlardır.
+
+```python
 class Vector:
     def __init__(self, x, y):
-        """Başlatıcı: x ve y koordinatlarını atar."""
+        """Nesne oluşturulurken x ve y bileşenlerini atar."""
         self.x, self.y = x, y
 
     def __add__(self, other):
-        """`+` operatörünü aşırı yükler: bileşenleri toplayıp yeni Vector döndürür."""
+        """`+` operatörünü özelleştirir: bileşenleri toplayıp yeni Vector döndürür."""
         return Vector(self.x + other.x, self.y + other.y)
 
     def __repr__(self):
-        """`print(v)` okunuşunu `Vector(x, y)` şeklinde düzenler."""
+        """`print(v)` ifadesini `Vector(x, y)` formatında gösterir."""
         return f"Vector({self.x}, {self.y})"
+```
 
-Kullanım Örneği:
+> **Açıklama Aşamaları:**
+>
+> 1. `__init__` – Başlatıcı yapıcı metod, x ve y değerlerini nesneye kaydeder.
+> 2. `__add__` – v1 + v2 işlemi çağrıldığında devreye girer, yeni Vector nesnesi üretir.
+> 3. `__repr__` – Konsolda temiz ve okunabilir çıktı sağlar.
 
-v1 = Vector(10, 20)
-v2 = Vector(50, 60)
-v3 = v1 + v2
-print(v3)  # 👉 Vector(60, 80)
+---
 
-Açıklama:
+## 3.0 Decorator’lar
 
-__init__: Nesne oluştururken bileşenleri (x, y) tanımlar.
+Fonksiyonların girişine/çıkışına dinamik davranış eklemeye yarar.
 
-__add__: v1 + v2 ifadesini mümkün kılar.
+### 3.1 Temel Decorator
 
-__repr__: Konsolda temiz, anlaşılır bir çıktı sağlar.
-
-2️⃣ Python Decorator’ları 🎉
-
-Fonksiyonların giriş/çıkışlarına dinamik davranış ekleyin.
-
-🔹 a) Temel Decorator
-
+```python
 def my_decorator(func):
     def wrapper(*args, **kwargs):
-        print("🛠️ Fonksiyon dekoratöründen önce bu mesaj gelir!")
+        print("🛠️ Öncesi mesaj")
         result = func(*args, **kwargs)
-        print("✅ Fonksiyon tamamlandı.")
+        print("✅ Sonrası mesaj")
         return result
     return wrapper
 
@@ -64,17 +97,17 @@ def my_decorator(func):
 def hello_world():
     print("👋 Hello World!")
 
-Adımlar:
+hello_world()
+```
 
-@my_decorator ile orijinal hello_world fonksiyonu wrapper ile sarılır.
+> **Açıklama:**
+>
+> 1. `@my_decorator` ile `hello_world` fonksiyonu `wrapper` ile sarılır.
+> 2. `wrapper` çalışırken önce ek işlem, sonra orijinal fonksiyon, en son ek işlem yapılır.
 
-Tek Sorumluluk Prensibi: Logging, yetkilendirme, önbellekleme gibi çapraz kesen özellikleri fonksiyondan ayırmak.
+### 3.2 Parametreli Decorator
 
-Açık/Kapalı Prensibi: Orijinal fonksiyonu değiştirmeden yeni davranış eklemektir.
-hello_world() çalıştığında önce dekoratör mesajları, sonra fonksiyon çalışır.
-
-🔹 b) Parametreli Decorator
-
+```python
 def repeat(times):
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -88,290 +121,208 @@ def repeat(times):
 def greet(name):
     print(f"🎉 Merhaba, {name}!")
 
-Not: greet("Besma") 3 kez çağrılır.
+greet("Besma")
+```
 
+> **Açıklama:**
+>
+> * `repeat(3)` ile decorator fonksiyonuna parametre verilir.
+> * `wrapper` içinde `func` belirtilen kez çağrılır.
 
-3️⃣ Magic Methods & Tasarım Desenleri 🧩
+---
 
-Magic Methods: __call__, __len__, __iter__ gibi yerleşik protokolleri özelleştirir.
+## 4.0 Tasarım Desenleri (Design Patterns)
 
-Decorator Pattern: Yeni sorumlulukları alt sınıf oluşturmadan ekler.
+Kodun modülerliğini ve genişletilebilirliğini artıran tekrarlanabilir çözümlerdir.
 
-Adapter, Strategy, Command, Factory: Kodunuzu esnek ve genişletilebilir kılar.
+| Desen Adı | Amaç                                                  |
+| --------- | ----------------------------------------------------- |
+| Factory   | Nesne oluşturmayı merkezi hale getirir                |
+| Proxy     | Asıl nesneye erişimi kontrol eder                     |
+| Singleton | Tekil örnek sağlar                                    |
+| Composite | Ağaç yapısındaki nesneleri homojen işlemlerle yönetir |
+| Flyweight | Bellek optimizasyonu yapar                            |
 
-4️⃣ Generator’lar 🌀
+> **Not:** Örnek uygulamalar 9.0 bölümünde detaylı işlenmiştir.
 
+---
+
+## 5.0 Generator’lar
+
+Bellek kullanımını minimuma indirerek "lazy evaluation" sağlar.
+
+```python
 def cubes(n):
     for i in range(1, n+1):
         yield i**3
 
-yield: Her seferinde bir değer üretir, bellek kullanımı minimum.
+for val in cubes(5):
+    print(val)  # 1, 8, 27, 64, 125
+```
 
-5️⃣ Komut Satırı Argümanları 🛠️
+> **Açıklama:**
+>
+> * `yield` ile değerler tek tek üretilir.
+> * Tüm liste bellekte tutulmaz.
 
-sys.argv: Tüm parametreleri listeler (sys.argv[0] betik adı).
+---
 
-argparse: Zorunlu/opcional seçenekler, otomatik -h yardım mesajı.
+## 6.0 Komut Satırı Argümanları
 
-6️⃣ Kapsülleme & Veri Gizleme 🛡️
+`sys.argv` ve `argparse` ile script’lere dışarıdan parametre ekler.
 
-Kapsülleme: Verileri (attributes) ve işlemleri (methods) bir arada tutar.
+```python
+import sys, argparse
 
-Veri Gizleme: __private öznitelikler ile dış erişimi kısıtlar (name mangling).
+parser = argparse.ArgumentParser(description="CLI Örneği")
+parser.add_argument("-n", "--name", required=True, help="İsim girin")
+args = parser.parse_args()
+print(f"Merhaba {args.name}!")
+```
 
+> **Açıklama:**
+>
+> 1. `ArgumentParser` ile parametreler tanımlanır.
+> 2. `-h` yardımı otomatik oluşturulur.
+> 3. `args.name` ile değere erişilir.
 
+---
 
+## 7.0 Kapsülleme & Veri Gizleme
 
-<<<<<<< Updated upstream
+Sınıf içi verileri korur ve dış erişimi kontrol eder.
 
-=======
-🌿 Kapsülleme nedir?
-Bir sınıfın içindeki verileri ve onları işleyen metotları bir arada tutma prensibidir. Böylece nesne sahibi (caller) sadece “kamuya açık” metotlarla (public API) etkileşime girer, iç yapının detaylarını bilmek zorunda kalmaz.
-
-🌿 Veri gizleme (data hiding) nedir?
-Sınıf içinde kullandığınız bazı özniteliklerin (attributes) doğrudan dışarıdan okunmasını/yazılmasını engelleme tekniğidir. Python’da bunun en yaygın yolu, öznitelik adının başına çift alt tire (__) koymaktır. Bu, isim mangling (isim çarpıtma) yoluyla dışarıdan erişimi zorlaştırır.
-------------------------------
-🧙‍♀️ Magic (Dunder) Methods Nedir?
-Magic methods, Python'da çift alt çizgi (__) ile başlayan ve biten özel metotlardır.
-Bu metotlara bazen dunder methods (double underscore = dunder) da denir.
-
-Bu metotlar, Python'un içsel işleyişine yön verir.
-Yani, toplama +, çağırma (), yazdırma print(), silme del, uzunluk len() gibi ifadelerin arkasında çalışan metotlardır.
-    🎯 Neden Kullanılır?
-    Python sınıflarını daha anlamlı, esnek ve kullanışlı hale getirir.
-    Operatör aşırı yüklemesi sayesinde +, -, *, ==, <, > gibi ifadeler özelleştirilebilir.
-    Kodunuzu dışarıya daha güzel ve okunabilir bir şekilde sunmanızı sağlar.
-    Büyük projelerde objeler arası etkileşimi kontrol etmek için vazgeçilmezdir.
-
-🎀 Decorator (Dekoratör) Nedir?
-Decorator, Python’da bir fonksiyonun davranışına dışarıdan yeni özellikler eklemek için kullanılan bir yapıdır. Asıl fonksiyonu bozmadan, onu bir "sargı" (wrapper) fonksiyonla çevreleyip, öncesine ya da sonrasına ekstra işlem koymamızı sağlar.
-
-🔧 Teknik Olarak Nasıl Çalışır?
-Bir dekoratör fonksiyonu, başka bir fonksiyonu parametre olarak alır.
-
-İçerisinde bir wrapper (sargı) fonksiyon tanımlar.
-
-Bu wrapper fonksiyonda:
-
-Ek kodlar yazılır (örn. loglama, zaman ölçme, izin kontrolü),
-
-Ardından asıl fonksiyon çalıştırılır.
-
-En sonunda, bu wrapper fonksiyonu geri döndürülür.
-
-Kullanımda fonksiyonun üstüne @decorator_ismi yazılır.
-
-
-
-⚙️ Generator (Üreteç) Nedir?
-Generator, Python’da belleği verimli kullanarak büyük veri yapılarıyla çalışmamıza olanak sağlayan özel bir fonksiyon tipidir. Normal return yerine yield kullanır.
-
-🧠 Nasıl Çalışır?
-Generator fonksiyonu çağrıldığında bellekte tüm listeyi oluşturmaz.
-
-yield ifadesine kadar olan kısmı çalıştırır, durur ve değeri döner.
-
-next() fonksiyonu ile bir sonraki yield’e kadar devam eder.
-
-Bu sayede "lazy evaluation" (tembel değerlendirme) yapılır: sadece ihtiyaç olduğunda veri üretilir.
-
-
-💡 Avantajları:
-✅ Bellek tasarrufu sağlar (örneğin: 10 milyon elemanlık liste oluşturmaz).
-
-✅ Sonsuz veri üretilebilir (while True ile).
-
-✅ Daha verimli ve hızlı çalışır.
-
-Python'da argument parsing, komut satırından bir script'e dışarıdan parametre (argüman) vermeyi sağlar. Bu, özellikle sistem programlama ve ağ (network) script'lerinde önemlidir. Python dosyaları genellikle terminalde python script.py şeklinde çalıştırılır; bu yapıya "komut satırı argümanları" eklemek için sys.argv listesi ve getopt modülü kullanılır:
-
-✅ 1. sys.argv ile Temel Argüman Okuma:
-sys.argv, komut satırından girilen tüm argümanları içeren bir listedir.
-
-sys.argv[0]: script'in adıdır.
-
-sys.argv[1], sys.argv[2], ...: kullanıcı tarafından girilen argümanlardır.
-
-Örnek:
-
-bash
-Copy
-Edit
-python script.py output.txt "Hello World"
-Kodda:
-
-python
-Copy
-Edit
-import sys
-filename = sys.argv[1]
-message = sys.argv[2]
-✅ 2. *args ve **kwargs ile Fonksiyonlarda Esnek Parametre Kullanımı:
-*args: sırasız (positional) argümanları alır (tuple).
-
-**kwargs: anahtar-değer çiftlerini alır (dict).
-
-✅ 3. getopt Modülü ile Opsiyonel Argümanlar:
-getopt.getopt() fonksiyonu ile -f gibi kısa seçenekler veya --file gibi uzun seçenekler tanımlanabilir.
-
-"f:m:" şeklinde iki nokta (:) kullanımında, o seçeneğin bir değer beklediği anlamına gelir.
-
-Örnek:
-
-bash
-Copy
-Edit
-python script.py -f output.txt -m "Hello World"
-Kod:
-
-python
-Copy
-Edit
-import sys, getopt
-
-opts, args = getopt.getopt(sys.argv[1:], "f:m:", ["file=", "message="])
-for opt, arg in opts:
-    if opt in ("-f", "--file"):
-        filename = arg
-    elif opt in ("-m", "--message"):
-        message = arg
-💡 Avantajları:
-Komut satırından veri girilmesini sağlar.
-
-Script'i daha esnek ve yeniden kullanılabilir kılar.
-
-Varsayılan değerlerle birlikte opsiyonel yapı kurulabilir.
-
-
-Python'da argument parsing, komut satırından script'e parametre almayı sağlar.
-
-🔹 sys.argv: Komut satırındaki tüm argümanları liste olarak verir.
-🔹 getopt: -f, --file gibi opsiyonel ve anahtar-değer şeklinde argümanları yönetir.
-🔹 *args, **kwargs: Fonksiyonlara esnek sayıda argüman göndermek için kullanılır.
-
-💡 Amaç: Script'i daha esnek, tekrar kullanılabilir ve dışarıdan veri alabilir hale getirmektir.
-🔐 Encapsulation (Kapsülleme) ve Data Hiding (Veri Gizleme)
-Python’da __ (çift alt çizgi) ile tanımlanan özellikler private (özel) hale gelir. Dışarıdan doğrudan erişilemez:
-
-python
-Copy
-Edit
-self.__name = name
-Bu özel alanlara erişim için getter ve değer atamak için setter yöntemleri kullanılır:
-
-python
-Copy
-Edit
-@property
-def Name(self): return self.__name
-
-@Name.setter
-def Name(self, value): self.__name = value
-Getter/setter yöntemleri sayesinde sınıf içindeki verilere kontrollü erişim sağlanır (örneğin: name == "Bob" ise farklı davran).
-
-⚙️ Static Method (Statik Metot)
-@staticmethod ile tanımlanan metotlar, sınıfın herhangi bir örneğine (objesine) bağlı olmadan çalışabilir.
-
-self parametresi almaz.
-
-Sınıf adıyla doğrudan çağrılabilir:
-
-python
-Copy
-Edit
+```python
 class Person:
-    @staticmethod
-    def greet(): print("Hello!")
+    def __init__(self, name):
+        self.__name = name  # private attribute
 
-Person.greet()  # Hello!
-💡 Ana Fikir:
-Encapsulation, nesnenin iç durumunu gizler ve kontrollü şekilde dışarıya açar.
+    @property
+    def name(self):
+        return self.__name
 
-Static method, sınıf örneğine ihtiyaç duymadan çalışan yardımcı fonksiyonlardır.
+    @name.setter
+    def name(self, value):
+        if len(value) < 2:
+            raise ValueError("İsim en az 2 karakter olmalı.")
+        self.__name = value
+```
 
-Bu yapılar birlikte kullanıldığında, daha güvenli, modüler ve bakımı kolay bir nesne yönelimli yazılım mimarisi oluşturulur.
+> **Açıklama:**
+>
+> * `__name` ile doğrudan erişim engellenir.
+> * `@property` ve `@setter` ile kontrollü erişim sağlanır.
 
+---
 
-🧠 Type Hinting (Tür İpuçları) – Python'da Ne ve Neden?
-Python dinamik tür tanımlamalı (dynamically typed) bir dildir; yani bir değişkenin türü, çalışma zamanında (runtime) belirlenir. Bu durum esnek olsa da, büyük projelerde hataların erken tespiti ve kodun okunabilirliği açısından sorun oluşturabilir.
+## 8.0 Type Hinting
 
-👇 Ne Yapılır?
-Python 3.5+ ile birlikte gelen type hinting, fonksiyonlara ve değişkenlere tür belirtmemizi sağlar:
+Kod okunabilirliğini ve statik analiz desteğini artırır.
 
-python
-Copy
-Edit
-def topla(x: int, y: int) -> int:
-    return x + y
-Bu kodda:
+```python
+from typing import List
 
-x ve y değişkenleri int (tam sayı) olmalıdır.
-
-Fonksiyonun dönüş değeri de yine int türündedir.
-
-Ama dikkat! Python bu yazımı çalışma zamanında zorunlu kılmaz. Bu bir not gibidir.
-
-🧪 Peki bu ne işe yarar?
-Kodun tür kurallarına uyup uymadığını doğrulamak için mypy gibi bir araç kullanılır:
-
-bash
-Copy
-Edit
-mypy main.py
-Bu araç, fonksiyona yanlış türde veri gönderdiğinizde hata verir:
-
-python
-Copy
-Edit
-def greet(name: str) -> str:
-    return f"Hello {name}"
-
-greet(42)  # mypy burada uyarı verir: int yerine str bekleniyor
-🔁 Return Type (Dönüş Tipi) ve Katmanlı Kullanım
-Fonksiyonların sadece parametreleri değil, dönüş tipleri de tip ipucu ile belirtilir.
-
-Böylece bir fonksiyonun başka bir fonksiyona verdiği değerin uyumlu türde olup olmadığı da kontrol edilebilir.
-
-📦 Python 3.9+ Özelliği: Liste Tipleri
-Python 3.9'dan itibaren liste gibi koleksiyonlara özel tip belirtebilirsiniz:
-
-python
-Copy
-Edit
-def toplam(liste: list[int]) -> int:
+def toplam(liste: List[int]) -> int:
     return sum(liste)
-Yani bu fonksiyon sadece int içeren listeler için çalışmalı deriz.
 
-📌 Özetle:
-Type hinting, Python kodunu daha okunur ve hatalara karşı daha güvenli hale getirir.
+print(toplam([1, 2, 3]))
+```
 
-Zorunlu değil, ama mypy gibi araçlarla birlikte kullanıldığında statik tür kontrolü sağlar.
+> **Açıklama:**
+>
+> * `List[int]` ve `-> int` bildirimi not niteliğindedir.
+> * `mypy` gibi araçlarla hatalar önceden yakalanabilir.
 
-Büyük projelerde, takım çalışmasında ve IDE desteğinde büyük avantaj sağlar.
+---
 
-Python yine de esnekliğini korur; yanlış tür verilse bile çalıştırır (mypy kullanmazsanız).
+## 9.0 Detaylı Tasarım Desenleri
 
-Dilerseniz bu konuyla ilgili örnekler, uygulamalar veya quiz şeklinde tekrar sorularla daha da pekiştirebiliriz 🌟
+### 9.1 Factory Pattern
+
+```python
+class IPerson:
+    def get_role(self): pass
+class Student(IPerson):
+    def get_role(self): return "Student"
+class Teacher(IPerson):
+    def get_role(self): return "Teacher"
+class PersonFactory:
+    @staticmethod
+    def build(person_type):
+        if person_type == "Student": return Student()
+        if person_type == "Teacher": return Teacher()
+        raise ValueError("Geçersiz tip")
+```
+
+> **Açıklama:**
+>
+> * `PersonFactory.build()` ile nesne türü runtime'da belirlenir.
+
+### 9.2 Proxy Pattern
+
+```python
+class RealService:
+    def request(self): print("Gerçek hizmet çağrıldı")
+class ProxyService:
+    def __init__(self): self._service = RealService()
+    def request(self):
+        print("Erişim kontrolü yapılıyor")
+        self._service.request()
+```
+
+> **Açıklama:**
+>
+> * Proxy, gerçek hizmete erişmeden önce veya sonra ek işlemler yapar.
+
+### 9.3 Singleton Pattern
+
+```python
+class SingletonMeta(type):
+    _instance = None
+    def __call__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__call__(*args, **kwargs)
+        return cls._instance
+
+class Database(metaclass=SingletonMeta):
+    pass
+```
+
+> **Açıklama:**
+>
+> * `SingletonMeta` ile sınıftan tek örnek oluşturulur.
+
+### 9.4 Composite Pattern
+
+```python
+class Component:
+    def operation(self): pass
+class Leaf(Component):
+    def operation(self): print("Leaf işlemi")
+class Composite(Component):
+    def __init__(self): self._children = []
+    def add(self, comp): self._children.append(comp)
+    def operation(self):
+        for child in self._children:
+            child.operation()
+```
+
+> **Açıklama:** Ağaç yapısındaki tüm bileşenlere homojen işlem uygulanır.
+
+### 9.5 Flyweight Pattern
+
+```python
+class FlyweightFactory:
+    _pool = {}
+    @classmethod
+    def get(cls, key):
+        if key not in cls._pool:
+            cls._pool[key] = object()
+        return cls._pool[key]
+```
+
+> **Açıklama:** Ortak nesneler havuzdan tekrar kullanılır, bellek tasarrufu sağlanır.
+
+---
 
 
-
-
-🌸 Factory Pattern ve Flyweight Pattern,
-yazılım geliştirmede kodun esnekliğini ve performansını artırmak için kullanılan iki önemli tasarım desenidir. Factory Pattern, bir nesne oluşturma işlemini merkezi bir "fabrika" sınıfına devrederek, hangi sınıfın örneği gerektiğini dış dünyadan gizler ve böylece yeni nesne türleri eklemeyi kolaylaştırır; örneğin bir PersonFactory sınıfı, gelen isteğe göre Student ya da Teacher nesnesi oluşturabilir. Bu desen, kodun genişletilebilirliğini ve bakımı kolaylaştırır. Öte yandan, Flyweight Pattern, bellekte çok sayıda benzer nesne gerektiğinde kullanılır ve ortak özellikleri paylaşarak gereksiz kopyaların önüne geçer. Böylece performans ve bellek kullanımı optimize edilir. Özellikle grafik uygulamaları ve oyun motorlarında sıkça tercih edilir. Her iki desen de yazılımda tek sorumluluk ilkesi, açık-kapalı prensibi ve kaynak verimliliği gibi nesne yönelimli programlamanın temel ilkelerine hizmet eder.
-
-🏭 Factory Design Pattern Nedir?
-Factory Design Pattern, nesne yönelimli programlamada kullanılan bir tasarım desenidir ve amacı, nesne yaratımını merkezi ve dinamik hale getirmektir. Bu desenle, kodlama aşamasında hangi alt sınıftan (örneğin Student, Teacher) nesne oluşturacağımıza karar vermek yerine, bunu çalışma zamanında (runtime) dinamik olarak belirleriz. Bu da kodun modülerliğini artırır, sorumlulukların ayrımını (separation of concerns) sağlar ve özellikle büyük projelerde sınıflar arası bağımlılığı azaltır. Python’da bunu, IPerson gibi bir arayüz (interface) tanımlayıp, bu arayüzü uygulayan (implements) Student ve Teacher gibi sınıflarla ve bu sınıfları üretecek bir PersonFactory sınıfıyla gerçekleştiriyoruz. PersonFactory.build_person("Student") çağrısı örneğin bir Student nesnesi oluşturur. Böylece, nesne üretimi tek bir yerden kontrol edilir ve sistemin genişletilebilirliği artar.
-
-🌸 Proxy Design Pattern,
- bir nesneye doğrudan erişim yerine, onun önüne bir “vekil” (proxy) yerleştirerek erişimi kontrol etmek, gizlemek, ya da ek işlevler eklemek için kullanılır. Bu desende asıl iş yapan sınıf (Person), IPerson adlı bir arayüzü (interface) uygular. Ancak bu sınıfın doğrudan örneklenmesini engellemek veya sarmalamak istediğimizde, devreye ProxyPerson sınıfı girer. ProxyPerson, aynı arayüzü uygular ve içeride bir Person nesnesi oluşturur. person_method fonksiyonu çağrıldığında önce kendi mesajını verir, sonra gerçek Person nesnesine yönlendirerek işi devreder. Böylece nesne oluşturma ve erişim sürecine bir ara katman (middleman) eklenmiş olur. Bu yapı özellikle güvenlik, erişim kontrolü, önbellekleme (caching), loglama gibi işlemler için kullanılır. Kısacası proxy, nesneye ulaşmadan önce araya girerek "kontrollü kapı bekçiliği" yapar.
-
- 🎯 Singleton Design Pattern Nedir?
-Amaç: Bir sınıftan (class) sadece tek bir örnek (instance) oluşturulmasını garanti altına almak.
-Böylece, sistemde birden fazla kişi bu sınıfa erişmeye çalışsa bile, her zaman aynı nesne (örnek) döner.
-
-
-🌸 Composite Design Pattern,
- nesneleri ağaç yapısı şeklinde düzenlemeye ve bu yapılar üzerinde aynı işlemleri gerçekleştirmeye olanak tanıyan bir tasarım desenidir. Bu desende, hem "bileşen" (yaprak sınıf) hem de "bileşik" (alt bileşenleri olan sınıf) aynı arayüzü (interface) uygular. Bu sayede tüm yapıya homojen bir şekilde işlem yapılabilir.
-    Örneğin:
-    🧩 Bir "Yönetim Departmanı", içinde "Muhasebe" ve "Yazılım" departmanlarını barındırır ve toplam çalışan sayısını bu şekilde hesaplar. Bu yapı, karmaşık organizasyonel sistemlerin veya ağaç benzeri yapıların modellenmesinde son derece kullanışlıdır.
->>>>>>> Stashed changes
