@@ -147,9 +147,9 @@ Kodun modülerliğini ve genişletilebilirliğini artıran tekrarlanabilir çöz
 
 ---
 
-## 5.0 Generator’lar
+## 5.0 ⚙️Generator’lar
 
-Bellek kullanımını minimuma indirerek "lazy evaluation" sağlar.
+Bellek kullanımını minimuma indirerek "lazy evaluation" sağlar. Normal return yerine yield kullanır.
 
 ```python
 def cubes(n):
@@ -163,8 +163,10 @@ for val in cubes(5):
 > **Açıklama:**
 >
 > * `yield` ile değerler tek tek üretilir.
+
 > * Tüm liste bellekte tutulmaz.
 
+> *  in detail : Generator fonksiyonu çağrıldığında bellekte tüm listeyi oluşturmaz. yield ifadesine kadar olan kısmı çalıştırır, durur ve değeri döner. next() fonksiyonu ile bir sonraki yield’e kadar devam eder. Bu sayede "lazy evaluation" (tembel değerlendirme) yapılır: sadece ihtiyaç olduğunda veri üretilir.
 ---
 
 ## 6.0 Komut Satırı Argümanları
