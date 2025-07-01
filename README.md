@@ -328,3 +328,114 @@ class FlyweightFactory:
 ---
 
 
+Odoo for debian "manually"
+
+### make sure that sudo works
+su
+apt-get update
+apt-get upgrade
+apt install sudo
+nano /etc/sudoers
+###################
+# make sure to write your username instead of "user"
+user ALL=(ALL:ALL) ALL
+exit
+
+### Installing the required packages
+sudo apt install make gcc curl python3-virtualenv autoconf automake build-essential python3-dev libssl-dev libpq-dev libldap2-dev libffi-dev libxslt1-dev libxml2-dev libblas-dev libatlas-base-dev zlib1g-dev libjpeg-dev postgresql libsasl2-dev
+
+### configure postgres, create a role in username 
+sudo su -l postgres
+psql
+################### 
+#make sure to write your username instead of "user"
+CREATE role user with login createdb;
+\q
+exit
+
+### download python and odoo
+wget https://www.python.org/ftp/python/3.10.13/Python-3.10.13.tgz
+wget http://nightly.odoo.com/16.0/nightly/tgz/odoo_16.0.latest.tar.gz
+
+### install python and configure it 
+tar -zxvf Python-3.10.13.tgz
+cd Python-3.10.13
+./configure --with-openssl=/usr/
+sudo make install
+python3.10 -m pip install --upgrade pip setuptools
+
+### extract odoo files and create virtual envierment
+tar -zxvf odoo_16.0.latest.tar.gz
+mv odoo-16.0* ./odoo-16
+cd odoo-16
+virtualenv -p python3.10 env16
+source env16/bin/activate 
+
+### install odoo's requirement and create odoo-bin
+pip install --upgrade pip setuptools
+pip install -r requirements
+cp setup/odoo ./odoo-bin
+chmod u+x odoo-bin
+./odoo-bin 
+
+
+----
+
+Ssh Bağlantısı yapmak sanal makine ve local host arasında :
+
+systemctl status ssh
+
+- macOS’te SSH durumunu nasıl kontrol ederiz?
+sudo systemsetup -getremotelogin
+🔹 Remote Login: On → SSH aktif
+🔹 Remote Login: Off → SSH kapalı
+
+- SSH’yi açmak:
+sudo systemsetup -setremotelogin on
+
+
+- SSH aktif mi port dinliyor mu?
+sudo lsof -iTCP -sTCP:LISTEN -n -P | grep sshd
+
+- IP adresinizi öğrenmek için:
+ipconfig getifaddr en0
+( inet 10.x.x.x gibi bir adres arayın. )
+
+- SSH Servisinin Durumunu Terminalden Kontrol Edelim
+sudo launchctl list | grep ssh
+( Eğer çıktı yoksa SSH arka planda çalışmıyor olabilir. )
+
+- SSH Servisini Terminalden Manuel Başlat (Yalnızca geçici çözüm)
+sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
+(Bu komut macOS’te yerleşik olan SSH servis tanımını yükler ve başlatır.)
+
+- Debian VM’de terminalden IP’yi öğrenmek için:
+ip a
+
+Test için:
+Eğer başka bir cihaz yoksa kendi MacBook’unuzda ikinci bir terminal açarak ssh localhost komutuyla bağlantı test edebilirsiniz:
+
+ssh basmabakirci@localhost
+-
+Attached to: NAT to Bridged Adapter 
+ - ping 10.40.0.207
+Eğer yanıt alamazsanız, ağ bağlantısı yok demektir.
+
+vs code ta bağlanmak sanal makineye cihazın kendisinden 
+vs code aç sol en altta mavi bir >< diye bir buton var open the remote window kısmından connect to host kısmı var onunla bağlanıyoruz:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
