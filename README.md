@@ -418,17 +418,21 @@ Eğer başka bir cihaz yoksa kendi MacBook’unuzda ikinci bir terminal açarak 
 ssh basmabakirci@localhost
 -
 Attached to: NAT to Bridged Adapter 
- - ping 10.40.0.207
+ - ping **.**.*.***
 Eğer yanıt alamazsanız, ağ bağlantısı yok demektir.
 
 vs code ta bağlanmak sanal makineye cihazın kendisinden 
 vs code aç sol en altta mavi bir >< diye bir buton var open the remote window kısmından connect to host kısmı var onunla bağlanıyoruz:
 
+---
+07.08.2025:
+- understanding backpropagation algorithm
+- Cognitive phycology
+- electric electronic engineering
+- nourology
 
-
-
-
-
+https://www.youtube.com/watch?v=B5MmXmMMuvI&t=13s
+https://youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&si=tqCmhAkeq9aXqMhm
 
 
 
