@@ -425,7 +425,7 @@ vs code ta bağlanmak sanal makineye cihazın kendisinden
 vs code aç sol en altta mavi bir >< diye bir buton var open the remote window kısmından connect to host kısmı var onunla bağlanıyoruz:
 
 ---
-07.08.2025:
+07.08.2025 and 08.08.2025:
 - understanding backpropagation algorithm
 - Cognitive phycology
 - electric electronic engineering
@@ -433,9 +433,64 @@ vs code aç sol en altta mavi bir >< diye bir buton var open the remote window k
 
 https://www.youtube.com/watch?v=B5MmXmMMuvI&t=13s
 https://youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&si=tqCmhAkeq9aXqMhm
+http://neuralnetworksanddeeplearning.com/chap1.html
 
+---
 
+1. **Rastgele Başla**
 
+   * Ağırlıklar ve bias’lar (yaklaşık 13 000 sayı) rastgele seçilir.
+   * Henüz hiçbir fikri yoktur; tahminleri “çorap içinde rakam” gibi karışık olur.
+
+2. **Tahmin Yap (Forward Pass)**
+
+   * 28×28 piksellik resmi alır, her pikseli 0–1 arasına dönüştürür.
+   * Bu değerler giriş katmanındaki 784 nöronu “yak” (aktivasyon = pikselin parlaklığı).
+   * Katman katman ilerle, her nöron kendine gelen aktivasyonları ağırlıklarıyla çarp, topla, bias ekle, sıkıştırıcı fonksiyondan geçir (sigmoid/ReLU).
+   * Son katmanda 10 sayı elde et; en büyük olanı “tahmin” olarak seç.
+
+3. **Hata Ölç (Maliyet Fonksiyonu)**
+
+   * Tahmin ile gerçek etiket arasındaki farkı kare al, her çıkış nöronu için topla, tüm örneklerin ortalamasını al → bu senin “maliyetin” (error).
+   * Büyük hata = kötü; küçük hata = iyi.
+
+4. **Nasıl Daha İyi Olacağını Bul (Gradyan Hesabı)**
+
+   * Hangi ağırlığı biraz artırsak ya da azaltırsak “hata” ne kadar değişir, ona bak.
+   * Bunu, her parametrenin maliyeti ne kadar “hissedeceğini” (türevi) hesaplayarak yapıyoruz.
+   * Basit benzetme: En dik iniş yönünü bulmak için tepeyi tararız.
+
+5. **Ağırlıkları Güncelle (Gradient Descent)**
+
+   * Her bir ağırlığı, “maliyeti en çok düşüren” yönde ve küçük bir adımla değiştir:
+
+     $$
+       w \;\gets\; w \;-\;\eta\;\frac{\partial C}{\partial w}
+     $$
+   * Burada $\eta$ (eta), adım büyüklüğü yani “öğrenme hızı”.
+
+6. **Tekrar Et**
+
+   * Yeni ağırlıklarla tekrar “Tahmin Yap → Hata Ölç → Güncelle” döngüsünü yüzlerce, binlerce kez uygula.
+   * Her adımda hata azalır, ağ “öğrenir” ve rakamları doğru tahmin etmeye başlar.
+
+7. **Mini-Batch İyileştirmesi**
+
+   * Tüm eğitimi her seferinde binlerce resme bakarak yapmak yavaş;
+   * Onun yerine küçük rastgele gruplar (“mini-batch”) kullan, böylece her adım daha hızlı hesaplanır.
+
+---
+
+**Özetleyelim:**
+
+* Sinir ağı önce “tamamen bilgisiz” başlar.
+* Resimleri bir katmandan diğerine iletip tahmin eder.
+* Tahminin ne kadar kötü olduğunu ölçer.
+* Hangi yönde değişirse hatanın azalacağını (gradyanı) hesaplar.
+* Ağırlıkları küçük adımlarla o yöne kaydırır.
+* Döngüyü tekrar tekrar çalıştırarak ağı eğitir ve doğruluğunu artırır.
+
+Bu basit döngü—**Tahmin → Hata → Gradyan → Güncelleme**—sayesinde sinir ağı “öğrenir.”
 
 
 
