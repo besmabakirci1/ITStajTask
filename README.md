@@ -493,6 +493,114 @@ http://neuralnetworksanddeeplearning.com/chap1.html
 Bu basit döngü—**Tahmin → Hata → Gradyan → Güncelleme**—sayesinde sinir ağı “öğrenir.”
 
 
+## 1. Maliyet (Cost) Hesabı
+
+*(İlk görüntü: çıktı farklarının kareleri)*
+
+1. Ağımızın **10 çıkış nöronu** var; her biri 0–1 arası bir değer üretiyor.
+2. Diyelim gerçek sayı “4”, dolayısıyla doğru cevap vektörü (one-hot) şöyle:
+
+   ```
+   [0,0,0,0,1,0,0,0,0,0]
+   ```
+3. Ağın verdiği çıktı örneğin:
+
+   ```
+   [0.28, 0.32, 0.32, 0.95, 0.83, 1.00, 0.63, 0.44, 0.14, 0.69]
+   ```
+4. Her bileşen için:
+
+   $$
+     (\text{çıktı}_k - \text{hedef}_k)^2
+   $$
+
+   *örneğin (0.83−1.00)², (1.00−0.00)², vs.*
+5. Bütün bu kareleri **topluyoruz** → bu tek resim için “maliyet”.
+6. Eğitim verisindeki tüm fotoğrafların malietlerini **ortalıyoruz** → ağın genel malieti.
+
+---
+
+## 2. Bir Nöronun Aktivasyonu
+
+*(İkinci görüntü: 0.2 = σ(w·a + b))*
+
+Her nöron üç şey yapar:
+
+1. **Ağırlıklı Toplam**
+
+   $$
+     z = w_0\,a_0 + w_1\,a_1 + \dots + w_n\,a_n + b
+   $$
+
+   * $a_i$: bir önceki katmandaki i’inci nöronun aktivasyonu
+   * $w_i$: o nörondan gelen bağlantının ağırlığı
+   * $b$: bias (ekstra sabit sayı)
+
+2. **Aktivasyon Fonksiyonu**
+
+   $$
+     a = \sigma(z)
+     \quad\text{(sigmoid fonksiyonu: 0–1 arası sıkıştırır)}
+   $$
+
+3. **“Nasıl Artırırım?”**
+
+   * Bias’ı ($b$) biraz artırırsam $z$ büyür → $a$ artar
+   * Özellikle büyük $a_i$ ile çarpılan $w_i$’yi artırırsam daha etkili olur
+   * (Ancak gerçek eğitimde direkt $a_i$ değiştiremeyiz, sadece $w,b$ güncelleriz.)
+
+---
+
+## 3. Vektör/Matriks İfadesi (Vectorization)
+
+*(Üçüncü görüntü: W·a = ?)*
+
+Tek bir nöron yerine **tüm katmanı** bir kerede hesaplamak için:
+
+1. **Aktivasyon vektörü** $a^{(0)}$:
+
+   $$
+     \begin{bmatrix}a_0 \\ a_1 \\ \vdots \\ a_n\end{bmatrix}
+     \quad(\text{örneğin }784\times1)
+   $$
+
+2. **Ağırlık matrisi** $W$:
+
+   $$
+     W = 
+     \begin{bmatrix}
+       w_{0,0} & w_{0,1} & \dots & w_{0,n} \\
+       w_{1,0} & w_{1,1} & \dots & w_{1,n} \\
+       \vdots & \vdots & \ddots & \vdots \\
+       w_{m,0} & w_{m,1} & \dots & w_{m,n}
+     \end{bmatrix}
+     \quad(m\times n)
+   $$
+
+3. **Bias vektörü** $b$:
+
+   $$
+     \begin{bmatrix}b_0\\b_1\\\vdots\\b_m\end{bmatrix}
+   $$
+
+4. **Tek adımda hesaplama**
+
+   $$
+     z^{(1)} = W\,a^{(0)} + b,
+     \quad
+     a^{(1)} = \sigma\bigl(z^{(1)}\bigr)
+   $$
+
+   * Böylece tüm sonraki katmanın $m$ nöronu için aktivasyonları bir defada bulmuş olursunuz.
+
+---
+
+**Kısa Özet**
+
+1. **Maliyet:** Çıktı ile hedef arasındaki farkların karelerini topla, ortala.
+2. **Nöron:** Önce ağırlıklı toplam, sonra sigmoid ile sıkıştır → aktivasyon.
+3. **Vektör/Matriks:** Bireysel toplama gerek kalmadan “W·a + b” formülüyle tüm katmanı hızlıca hesapla.
+
 
 
 
