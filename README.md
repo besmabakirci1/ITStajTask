@@ -698,6 +698,19 @@ Böylece **matematiksel olarak** backpropagation’ı “öğrenmiş” olursunu
 
 
 
+--- 
+
+kendi ai modelini customise et dedi 
+https://github.com/modelscope/modelscope
+https://github.com/unslothai/unsloth
+https://huggingface.co/
+deepseek-r1:8b   kurdum 5 gb  ram yiyor şerefsiz , https://ollama.com/library/deepseek-r1
+Modeli çalıştırmak için terminale bunu yazın: 
+ollama run deepseek-r1:8b 
+
+https://chatgpt.com/c/686d5030-8cc4-800e-ae51-028f25d8afb6
+https://www.youtube.com/watch?v=bXf2Cxf3Wk0
+
 
 
 
