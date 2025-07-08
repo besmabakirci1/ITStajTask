@@ -602,6 +602,101 @@ Tek bir nöron yerine **tüm katmanı** bir kerede hesaplamak için:
 3. **Vektör/Matriks:** Bireysel toplama gerek kalmadan “W·a + b” formülüyle tüm katmanı hızlıca hesapla.
 
 
+## Ağırlığa Göre Maliyeti Hesaplamak
+
+* **Soru:** Bir ağırlık $w$ – ki bu, örneğin son katmandaki tek bir bağlantının gücü olsun – ne kadar değiştirilirse, maliyet fonksiyonu $C$ ne kadar değişir?
+* Bunu matematiksel olarak
+
+  $$
+    \frac{\partial C}{\partial w}
+  $$
+
+  ifadesiyle sorarız: “$w$’yi 0.01 artırırsam $C$ ne kadar değişir?”
+
+---
+
+## 2. Zincir Kuralı (Chain Rule) Nasıl Uygulanır?
+
+Diyelim tek bir yol var:
+
+$$
+  w \;\longrightarrow\; z \;\longrightarrow\; a \;\longrightarrow\; C
+$$
+
+* **$z$:**   $z = w\cdot a_{\text{önceki}} + b$ (ağırlıklı toplam + bias)
+* **$a$:**   $a = \sigma(z)$ (sigmoid veya ReLU ile sıkıştırma)
+* **$C$:**   $(a - y)^2$ (hedef $y$ ile arasındaki kare fark)
+
+Bu üç aşamayı, küçük bir $w$ değişikliğinin maliyete nasıl yansıdığını bulmak için zincir kuralıyla çarparız:
+
+$$
+  \frac{\partial C}{\partial w}
+  =
+  \underbrace{\frac{\partial C}{\partial a}}_{\displaystyle\text{1) }2(a - y)}\;\times\;
+  \underbrace{\frac{\partial a}{\partial z}}_{\displaystyle\text{2) }\sigma'(z)}\;\times\;
+  \underbrace{\frac{\partial z}{\partial w}}_{\displaystyle\text{3) }a_{\text{önceki}}}
+$$
+
+1. **$\partial C/\partial a = 2(a - y)$:**
+
+   * Ne kadar “yanlış” olduğumuzu (a ile y farkı) gösterir.
+2. **$\partial a/\partial z = \sigma'(z)$:**
+
+   * Sigmoid’in eğimi – $z$’deki küçük değişikliğin $a$’yı ne kadar değiştirdiği.
+3. **$\partial z/\partial w = a_{\text{önceki}}$:**
+
+   * Ağırlığı ne kadar artırırsak artırın, bu bağlantının etkinliği önceki aktivasyona (girdi sinyaline) bağlıdır.
+
+---
+
+## 3. Bias için Türev
+
+* Bias $b$ için “3) adım” şöyle değişir:
+  $\displaystyle \frac{\partial z}{\partial b} = 1$
+* Yani
+
+  $$
+    \frac{\partial C}{\partial b}
+    =
+    \frac{\partial C}{\partial a}\;\times\;\frac{\partial a}{\partial z}\;\times\;1
+  $$
+
+---
+
+## 4. Daha Büyük Ağlarda Ne Değişir?
+
+* Gerçek bir ağda her katmanda onlarca nöron var, ama formül **aynı** kalır. Tek fark:
+
+  * Bir önceki katmandaki her nöronun değişimi, **tüm** sonraki katmandaki nöronlara ayrı ayrı “zincir kuralı”yla yansıtılır ve **toplanır**.
+* Bunun sonucu, her bir ağırlık için “o ağırlığın tüm yollar üzerinden maliyete etkisi” hesaplanmış olur.
+
+---
+
+## 5. Neden Önemli?
+
+* Bu kısım, **backpropagation**’ın kalbi:
+
+  * Maliyet fonksiyonunun en hızlı düştüğü yöne (negatif gradyana) adım atmamızı sağlar.
+  * Böylelikle ağırlıkları en “etkili” şekilde güncelleriz.
+
+---
+
+### Özet Adımlar
+
+1. **Forward Pass:** Hesapla $z$, sonra $a$, sonra $C$.
+2. **Zincir Kuralı:**
+   $\partial C/\partial w = (\partial C/\partial a)\times(\partial a/\partial z)\times(\partial z/\partial w)$.
+3. **Tüm Ağırlıkları Güncelle:**
+
+   $$
+     w \gets w \;-\;\eta\;\frac{\partial C}{\partial w}
+   $$
+
+   ($\eta$ = öğrenme hızı)
+
+Böylece **matematiksel olarak** backpropagation’ı “öğrenmiş” olursunuz – sonraki adım, bu formülleri kodunuza taşıyıp denemek!
+
+
 
 
 
