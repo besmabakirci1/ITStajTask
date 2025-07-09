@@ -29,3 +29,12 @@
 - Searching about the libraries of llm & Learning how to customize llm espacially by using ollama (beacuse we download it before):
   1. [https://github.com/malibayram/llm-from-scratch]
   2. [https://www.udemy.com/course/sifirdan-llm-gelistirme-kendi-dil-modelini-olustur/?couponCode=LOCLZDOFFPTRCTRL]
+ 
+  the model that I have downloaded :
+  https://ollama.com/library/deepseek-r1
+  and to run it on the terminal we should write "ollama run deepseek-r1:8b" 
+
+some of the libraries that the instroctur mentioned about it :
+https://github.com/modelscope/modelscope
+https://github.com/unslothai/unsloth
+https://huggingface.co/
