@@ -1,7 +1,7 @@
 Selamlar 🌷
 
 * **benim bir başka serüvenim ile karşı karşıyasınız bu benim ilk stajım 04.07.2025 - 30.07.2025 tarihlerinde staj için yaptığım her şeyi dokümante ediyor olacağım...**
-* **Apple Silicon Mac kullandığımı unutmayın; bazı kurulum ve adımlar farklı olabilir.**
+* **Apple Silicon Mac kullandığımı bilginize sunmak isterim çünkü bazı kurulum ve adımlar farklı olabilir.**
 
 ## 📝 Ön Kabul Görevleri
 
