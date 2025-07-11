@@ -635,7 +635,7 @@ Her veri noktası veya mini-batch için:
 
 ### İnternet Gerçekte Nasıl Çalışır?
 
-(Video)[https://www.youtube.com/watch?v=GIvU5pDrT1o]
+[Video](https://www.youtube.com/watch?v=GIvU5pDrT1o) 
 
 İnternete bağlanmak, istemci (client) cihazdan başlayan ve uçtan uca bir ağ altyapısını tetikleyen, çok katmanlı bir iletişim sürecidir. Kullanıcı bir istekte bulunduğunda (örneğin YouTube'da bir videoya tıklamak), bu istek IP paketlerine bölünerek DNS sunucusu üzerinden hedef sunucunun IP adresi çözülür ve rotalanır. Veriler, genellikle yüksek performanslı SSD’lerle donatılmış, redundant sistemlere sahip veri merkezlerinde saklanır. Bu veriler, dünya genelini saran denizaltı fiber optik kablolar üzerinden, ışık sinyalleri şeklinde minimum gecikmeyle iletilir. Fiber hatlardan çıkan optik sinyaller, modemlerde elektriksel sinyale dönüştürülerek WiFi veya baz istasyonları üzerinden son kullanıcıya ulaşır. IP yönlendirme, paket sıralaması ve hata kontrolü ise TCP/IP başta olmak üzere çeşitli ağ protokolleri tarafından sağlanır. Her veri paketi, hedefe farklı yollardan ulaşabilir ve istemci tarafında yeniden birleştirilerek içerik oluşturulur. Bu sistem, ICANN gibi küresel otoriteler tarafından yönetilen bir adresleme ve protokol standardizasyonu ile işler; yani bir video akışı, aslında ışık hızında hareket eden binlerce paketin, onlarca protokol ve altyapı katmanıyla senkronize şekilde taşınmasıdır.
 
