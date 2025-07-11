@@ -543,11 +543,52 @@ Bu dört adım tekrarlanarak ağ ‘öğrenir’ ve tahmin doğruluğu artar.
 
 
 
+### Neural Network
+
+- **Nöron** Nedir?
+   Sayı tutan birimdir ve her nöron 0–1 arası bir aktivasyon değeri taşır. Giriş katmanında 784 nöron (28×28 piksellik her piksel için bir nöron).
+- **Aktivasyon** Nedir ?
+   Pikselin gri ton değeridir ve (0 = siyah, 1 = beyaz) nöronun aktivasyonu olur. Yüksek aktivasyon = o nöron “parlak” (aktiftir) düşünülür.
 
 
+Problemin Tanımı: 28×28 piksellik düşük çözünürlüklü el yazısı rakam görüntülerini (örneğin “3”) bilgisayarla otomatik tanımanın ne kadar zor olduğunu vurguluyor.
+İnsan Beyni–Bilgisayar Karşılaştırması: İnsan görsel korteksinin bu görevi nasıl zorlanmadan çözdüğünü, ancak bilgisayarda bunun “komik derecede” karmaşık bir problem hâline geldiğini örneklerle açıklar.
+**Öğrenme (Learning) Kavramı**
+Amaç: Bu on binlerce parametrenin “doğru” değerlerini otomatik olarak bulmak.
 
 
+..
+Öğrenme (Learning) Kavramı: soyut bir şeyi somutlandırmak sonucu gerçekleşir. Amaç , on binlerce parametrenin “doğru” değerlerini otomatik bir şekilde ve hızlı bir şekilde bulmaktır.
 
+
+Soyutlama Düzeyleri:
+İlk katman, Giriş Katmanı (Input Layer): Ham pikseller. 784 nöron.
+Orta katmanlar, Gizli Katmanlar (Hidden Layers): Kenar, köşe, döngü gibi alt-bileşenler. Örnekte iki gizli katman, her biri 16 nöron. Buradaki sayıların (16 gibi) ekran gösterimine uygun seçildiğini, uygulamada farklı boyut ve katman sayıları denenebileceğini vurguluyor.
+
+Çıkış katmanı(Output Layer): Bileşen kombinasyonlarından rakam tanıması , 10 nöron (0’dan 9’a kadar her rakam için bir nöron).
+
+Genel Amaç: Aynı yapı, farklı görüntü ve ses tanıma görevlerine de uyarlanabilir.
+
+
+**İleri Besleme Mekanizması (Forward Propagation)**
+- Her gizli katmandaki nöron, bir önceki katmandaki tüm nöronların aktivasyonlarıyla “bağlantılıdır”. Bu bağlantıların her birine bir **ağırlık (weight)** atanır ve  Bir nöronun, önceki katmandaki her bir nörondan gelen “sinyalleri” ne kadar önemseyeceğini belirler.
+- **Bias**, sonraki katmandaki nöron sayısı kadar tekil ek değerdir.  Nöronun “ne zaman” aktif olacağını kontrol eder (“Eşik” ayarı yapar) ; ağırlıklı toplam belli bir değeri aşmadan nöron kısmen hatta tamamen aktifleşmez.
+
+Bias ve weight parametreleri veriyle eğitim (training) aşamasında—örn. gradient descent yöntemiyle—otomatik olarak ayarlanır. Böylece ağımız, el yazısı rakamları tanımayı “öğrenir”.
+
+
+- Her katman atlaması için “önceki katmandaki nöron sayısı” ile “sonraki katmandaki nöron sayısı” çarpılır . Her **bağ**, bu formülle hesaplanır.
+- **Aktivasyon Fonksiyonu** : Toplam sonucu 0–1 aralığına “sıkıştırmak” (squash) için sigmoid (lojistik) fonksiyon kullanılır. Modern ağlarda sıklıkla ReLU (max(0, x)) tercih edilir; eğitimi kolaylaştırdığı için.
+
+- Her katman için : Parametre=(ağırlık sayısı)+(bias sayısı) 
+
+
+| Geçiş                           | Önceki katman | Sonraki katman | Ağırlık Matrisi Boyutu | Ağırlık sayısı    | Bias sayısı | Parametre  | Bias vektörü boyutu | Ara Toplam |
+| ------------------------------- | ------------- | -------------- | ---------------------- | ----------------- | ----------- | ---------- | ------------------- | ---------- |
+| Giriş → 1.Gizli katman          | 784 nöron     | 16 nöron       | (16, 784)              | 784 × 16 = 12 544 | 16          | 12 560     | (16, 1)             | 12 560     |
+| 1.Gizli katman → 2.Gizli katman | 16 nöron      | 16 nöron       | (16, 16)               | 16 × 16 = 256     | 16          | 272        | (16, 1)             | 272        |
+| 2.Gizli katman → Çıkış          | 16 nöron      | 10 nöron       | (10, 16)               | 16 × 10 = 160     | 10          | 170        | (10, 1)             | 170        |
+| **Genel Toplam**                |               |                |                        | **12 960**        | **42**      | **13 002** |                     | **13 002** |
 
 
 
