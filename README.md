@@ -588,6 +588,57 @@ Her veri noktası veya mini-batch için:
   Video dersleri: https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv  
 
 
+----
+
+## 🌐 Fundamental of Network:
+[Kullanılan Kitap Linki 📘](https://drive.google.com/file/d/1RzrRfISQd7i8XpL0zkMRHvKRFqIOs7df/view?usp=drive_link)  
+and My Notes :
+
+### 🧱 **OSI MODEL**
+**P**LEASE **D**O **N**OT **T**HROW THE **S**OUSAGE **P**İZZA **A**WAY  
+
+<details>
+<summary> as Table</summary>
+
+<br>
+
+| Katman No | Katman Adı      | Açıklama                                                                 | Örnek Donanım / Protokoller         |
+|-----------|------------------|--------------------------------------------------------------------------|-------------------------------------|
+| 1️⃣        | **Physical**     | Bit seviyesinde iletim; elektriksel ve fiziksel özellikler               | 🧱 Hub, Kablo, Voltaj, Bit           |
+| 2️⃣        | **Data Link**    | Frame oluşturma, MAC adresleme ve hata denetimi                         | 🧠 Switch, MAC, Ethernet             |
+| 3️⃣        | **Network**      | IP adresleme, yönlendirme ve paketleme                                  | 🧭 Router, IP, ICMP                  |
+| 4️⃣        | **Transport**    | Uçtan uca iletişim, veri aktarım kontrolü                               | 📡 TCP, UDP, Port Numaraları         |
+| 5️⃣        | **Session**      | Oturum açma ve senkronizasyon                                           | 🗂️ Oturum Yönetimi, RPC, NetBIOS     |
+| 6️⃣        | **Presentation** | Verinin sunumu, şifreleme, biçim dönüşümleri                            | 🔐 JPEG, MP3, SSL/TLS, ASCII         |
+| 7️⃣        | **Application**  | Kullanıcının doğrudan etkileştiği katman                               | 🌍 HTTP, FTP, SMTP, GitHub API       |
+
+</details>
+
+📦 1->3 : Media Layer  💻 4->7 : Host Layer  
+1. **Physical** ⚡️: bits, hub  
+2. **Data Link** 🔗: switcher, frames, MAC address  
+3. **Network** 🌍: router, packages, IP address  
+4. **Transport** 🚚:
+   - **TCP** 🔵:
+     - ✅ %100 all bits delivered  
+     - 📥 make sure if it's received  
+     - 🤝 3 way handshake : SYN ➝ SYN-ACK ➝ ACK
+     
+   - **UDP** 🔴:
+     - 📞 phone call  
+     - ⏱️ real time  
+     - ❓ not sure if all bits received  
+5. **Session** 🗂️:
+   - 🧠 Logical Parts  
+   - 🔁 Synchronization and send to ports  
+6. **Presentation** 🎭:
+   - 🔐 connect the data to decrypt or encrypt (if it's needed)  
+   - 🧬 syntax layer  
+7. **Application** 🧑‍💻:
+   - 🧾 End the user layer  
+   - 🔚 Deal with last protocol  
+
+
 
 
 
