@@ -2,7 +2,9 @@ Selamlar 🌷
 
 * **benim bir başka serüvenim ile karşı karşıyasınız bu benim ilk stajım 04.07.2025 - 30.07.2025 tarihlerinde staj için yaptığım her şeyi dokümante ediyor olacağım...**
 * **Apple Silicon Mac kullandığımı bilginize sunmak isterim çünkü bazı kurulum ve adımlar farklı olabilir.**
+  
 
+  
 ## 📝 Ön Kabul Görevleri
 
 1. **Geliştirme Ortamı Kurulumu (VirtualBox + Debian ARM64)**
@@ -63,7 +65,6 @@ Selamlar 🌷
    * Amaç: Magic Methods, Decorator, Generator, OOP, Design Patterns öğren
 
 ---
-
 ##  1. Hafta :
 
 * **Understanding Neural Network and Backpropagation Algorithm**
@@ -111,8 +112,11 @@ Selamlar 🌷
   ollama run deepseek-r1:8b --context 2048
   ollama fine-tune deepseek-r1:8b --dataset ./data/my_prompts.jsonl --output custom-deepseek
   ```
+---
 
-## 🐍 Python Kavramları (2.0–9.0) (2.0–9.0) Python Kavramları (2.0–9.0)
+<details> 
+  
+**<summary> Design Pattern and Python: </summary>**
 
 ### 2.0 Magic Methods (Dunder Metotlar)
 
@@ -138,8 +142,6 @@ class Vector:
 > 1. `__init__` – Başlatıcı yapıcı metod, x ve y değerlerini nesneye kaydeder.
 > 2. `__add__` – `v1 + v2` işlemi çağrıldığında devreye girer, yeni `Vector` nesnesi üretir.
 > 3. `__repr__` – Konsolda temiz ve okunabilir çıktı sağlar.
-
----
 
 ### 3.0 Decorator’lar
 
@@ -192,7 +194,7 @@ greet("Besma")
 > * `repeat(3)` ile decorator fonksiyonuna parametre verilir.
 > * `wrapper` içinde `func` belirtilen kez çağrılır.
 
----
+
 
 #### 4.0 Tasarım Desenleri (Design Patterns)
 
@@ -208,7 +210,7 @@ Kodun modülerliğini ve genişletilebilirliğini artıran tekrarlanabilir çöz
 
 > **Not:** Örnek uygulamalar 9.0 bölümünde detaylı işlenmiştir.
 
----
+
 
 #### 5.0 ⚙️ Generator’lar
 
@@ -229,7 +231,7 @@ for val in cubes(5):
 > * Tüm liste bellekte tutulmaz.
 > * `next()` ile bir sonraki `yield`'e kadar ilerler, tembel değerlendirme yapılır.
 
----
+
 
 #### 6.0 Komut Satırı Argümanları
 
@@ -250,7 +252,7 @@ print(f"Merhaba {args.name}!")
 > 2. `-h` yardımı otomatik oluşturulur.
 > 3. `args.name` ile değere erişilir.
 
----
+
 
 #### 7.0 Kapsülleme & Veri Gizleme
 
@@ -277,7 +279,7 @@ class Person:
 > * `__name` ile doğrudan erişim engellenir.
 > * `@property` ve `@setter` ile kontrollü erişim sağlanır.
 
----
+
 
 #### 8.0 Type Hinting
 
@@ -297,7 +299,6 @@ print(toplam([1, 2, 3]))
 > * `List[int]` ve `-> int` bildirimi not niteliğindedir.
 > * `mypy` gibi araçlarla hatalar önceden yakalanabilir.
 
----
 
 ### 9.0 Detaylı Tasarım Desenleri
 
@@ -322,10 +323,11 @@ class PersonFactory:
 >
 > * `PersonFactory.build()` ile nesne türü runtime'da belirlenir.
 
----
+</details>
 
-## 🛠️ Odoo on Debian (Manual Kurulum)
-
+<details> 
+  **<summary> 🛠️ Odoo on Debian (Manual Kurulum)</summary>**
+  
 **Detaylı Adımlar:**
 
 1. Sistem Güncelleme ve Bağımlılıklar
@@ -429,12 +431,8 @@ sudo systemctl start odoo.service
 ```bash
 sudo ufw allow 8069/tcp
 ```
-
----
-
-## 🔑 SSH & VS Code Remote
-
-**Detaylı Adımlar:**
+</details>
+<details> **<summary> 🔑 SSH & VS Code Remote </summary>**
 
 1. Debian VM Üzerinde SSH Sunucusu
 
@@ -495,29 +493,30 @@ ssh -L 8069:localhost:8069 debian-odoo
 * Agent Forwarding: ForwardAgent yes
 * Multiplexing: ControlPersist 600
 
----
+</details>
+
 
 # 🌐 Neural Network and Backpropagation Algorithm 🤖🧠
 
 
-## 1. Nöron Nedir? ⚙️
+### 1. Nöron Nedir? ⚙️
 - **Tanım:** Sayı tutan birimdir ve her nöron 0–1 arası bir aktivasyon değeri taşır.  
 - **Giriş katmanı:** 784 nöron (28×28 piksellik her piksel için bir nöron)
 
-## 2. Aktivasyon Nedir? 🌟
+### 2. Aktivasyon Nedir? 🌟
 - **Tanım:** Pikselin gri ton değeridir (0 = siyah, 1 = beyaz).  
 - **Anlamı:** Yüksek aktivasyon = o nöron “parlak” (aktiftir)
 
-## 3. Problemin Tanımı 🧐
+### 3. Problemin Tanımı 🧐
 28×28 piksellik düşük çözünürlüklü el yazısı rakam görüntülerini (örneğin “3”) bilgisayarla otomatik tanımanın ne kadar zor olduğunu vurguluyor.  
 > **İnsan Beyni–Bilgisayar Karşılaştırması:** İnsan görsel korteksi bu görevi zorlanmadan çözer; bilgisayarda ise “komik derecede” karmaşık hale gelir.
 
-## 4. Öğrenme (Learning) Kavramı 🚀
+### 4. Öğrenme (Learning) Kavramı 🚀
 Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.  
 **Amaç:** On binlerce parametrenin “doğru” değerlerini otomatik ve hızlı bir şekilde bulmak.
 
 
-## 5. Soyutlama Düzeyleri 🏗️
+### 5. Soyutlama Düzeyleri 🏗️
 - **Giriş Katmanı (Input Layer):** Ham pikseller. 784 nöron.  
 - **Gizli Katmanlar (Hidden Layers):** Kenar, köşe, döngü gibi alt-bileşenler.  
   - Örnekte iki gizli katman, her biri 16 nöron.  
@@ -525,14 +524,14 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 
 > **Genel Amaç:** Aynı yapı, farklı görüntü ve ses tanıma görevlerine de uyarlanabilir.
 
-## 6. İleri Besleme Mekanizması 🔄
+### 6. İleri Besleme Mekanizması 🔄
 - Her gizli katmandaki nöron, önceki katmandaki tüm nöronların aktivasyonlarıyla “bağlantılıdır”.  
 - **Ağırlık (weight):** Sinyallerin gücünü belirler.  
 - **Bias:** Nöronun “ne zaman” aktif olacağını kontrol eden eşik ayarı.  
 
 > Eğitim aşamasında bias ve weight parametreleri gradient descent ile otomatik olarak ayarlanır.
 
-## 7. Parametre Hesabı 📊
+### 7. Parametre Hesabı 📊
 - Her katman atlaması için *önceki katmandaki nöron sayısı* × *sonraki katmandaki nöron sayısı* kadar bağlantı (weight).  
 - **Aktivasyon fonksiyonu:** Toplam sonucu 0–1 aralığına sıkıştırmak (sigmoid veya ReLU).  
 - **Toplam parametre sayısı:** weight sayısı + bias sayısı.  
@@ -545,13 +544,13 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 | **Genel Toplam**               |               |                |                        | **12 960**        | **42**      | **13 002**|                     | **13 002** |
 
 
-## 8. Backpropagation’ın Amacı 🎯
+### 8. Backpropagation’ın Amacı 🎯
 - **Amaç:** Hangi ağırlık, hatayı ne kadar etkiliyor?  
 - **Hedef:** Modelin tahmin hatasını (maliyeti) en aza indirmek.  
 > **Özet:** Tahmin → Hata → Gradyan → Güncelleme
 
 
-## 9. Adım Adım İşleyiş 🚶‍♀️
+### 9. Adım Adım İşleyiş 🚶‍♀️
 | Adım | Ne Yapıyoruz?                                                                                 |
 | ---- | --------------------------------------------------------------------------------------------- |
 | 1    | **Tahmin (Forward Pass):** Girdiyi ağdan geçirip çıktı değerini hesaplıyoruz.                  |
@@ -559,7 +558,7 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 | 3    | **Geri Yayılım (Backprop):** Hatanın her ağırlığa ne kadar etki ettiğini belirliyoruz.         |
 | 4    | **Ağırlık Güncelleme:** Ağırlıkları, hatayı azaltacak yönde küçük adımlarla güncelliyoruz.      |
 
-## 10. Basit Örnek Görseliyle 🖼️
+### 10. Basit Örnek Görseliyle 🖼️
 - **Girdi:** `[x₁, x₂]`  
 - **Ağırlıklar:** `[w₁, w₂]`, **Bias:** `b`  
 - **Hesap:** `z = w₁·x₁ + w₂·x₂ + b` → `a = sigmoid(z)`  
@@ -567,7 +566,7 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 - **Geri Yayılım:** Hangi `w₁` veya `w₂` değişirse hata ne kadar değişir?  
 - **Güncelleme:** `w ← w − η·(etki)` (`η` = öğrenme hızı)
 
-## 11. Döngüyü Tekrarlama 🔁
+### 11. Döngüyü Tekrarlama 🔁
 Her veri noktası veya mini-batch için:  
 1. Tahmin  
 2. Hata Hesaplama  
@@ -576,9 +575,8 @@ Her veri noktası veya mini-batch için:
 
 > Bu dört adım tekrarlanarak ağ “öğrenir” ve tahmin doğruluğu artar.
 
----
 
-## 📚 Ek Kaynaklar
+#### 📚 Ek Kaynaklar
 - **Ian Goodfellow, Yoshua Bengio & Aaron Courville** – *Deep Learning* (MIT Press, 2016)  
   Resmî web sitesi ve PDF: https://www.deeplearningbook.org/  
 - **Michael Nielsen** – *Neural Networks and Deep Learning* (online kitap, 2015)  
@@ -588,19 +586,15 @@ Her veri noktası veya mini-batch için:
   Video dersleri: https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv  
 
 
-----
-
 ## 🌐 Fundamental of Network:
-[Kullanılan Kitap Linki 📘](https://drive.google.com/file/d/1RzrRfISQd7i8XpL0zkMRHvKRFqIOs7df/view?usp=drive_link)  
-and My Notes :
+
+### [The Book That We Used 📘](https://drive.google.com/file/d/1RzrRfISQd7i8XpL0zkMRHvKRFqIOs7df/view?usp=drive_link)  & My Notes :
 
 ### 🧱 **OSI MODEL**
 **P**LEASE **D**O **N**OT **T**HROW THE **S**OUSAGE **P**İZZA **A**WAY  
 
 <details>
-<summary> as Table</summary>
-
-<br>
+**<summary> as Table</summary> **
 
 | Katman No | Katman Adı      | Açıklama                                                                 | Örnek Donanım / Protokoller         |
 |-----------|------------------|--------------------------------------------------------------------------|-------------------------------------|
@@ -610,7 +604,7 @@ and My Notes :
 | 4️⃣        | **Transport**    | Uçtan uca iletişim, veri aktarım kontrolü                               | 📡 TCP, UDP, Port Numaraları         |
 | 5️⃣        | **Session**      | Oturum açma ve senkronizasyon                                           | 🗂️ Oturum Yönetimi, RPC, NetBIOS     |
 | 6️⃣        | **Presentation** | Verinin sunumu, şifreleme, biçim dönüşümleri                            | 🔐 JPEG, MP3, SSL/TLS, ASCII         |
-| 7️⃣        | **Application**  | Kullanıcının doğrudan etkileştiği katman                               | 🌍 HTTP, FTP, SMTP, GitHub API       |
+| 7️⃣        | **Application**  | Kullanıcının doğrudan etkileştiği katman                                | 🌍 HTTP, FTP, SMTP, GitHub API       |
 
 </details>
 
@@ -639,25 +633,34 @@ and My Notes :
    - 🔚 Deal with last protocol  
 ---
 
+### İnternet Gerçekte Nasıl Çalışır?
+
+(Video)[https://www.youtube.com/watch?v=GIvU5pDrT1o]
+
+İnternete bağlanmak, istemci (client) cihazdan başlayan ve uçtan uca bir ağ altyapısını tetikleyen, çok katmanlı bir iletişim sürecidir. Kullanıcı bir istekte bulunduğunda (örneğin YouTube'da bir videoya tıklamak), bu istek IP paketlerine bölünerek DNS sunucusu üzerinden hedef sunucunun IP adresi çözülür ve rotalanır. Veriler, genellikle yüksek performanslı SSD’lerle donatılmış, redundant sistemlere sahip veri merkezlerinde saklanır. Bu veriler, dünya genelini saran denizaltı fiber optik kablolar üzerinden, ışık sinyalleri şeklinde minimum gecikmeyle iletilir. Fiber hatlardan çıkan optik sinyaller, modemlerde elektriksel sinyale dönüştürülerek WiFi veya baz istasyonları üzerinden son kullanıcıya ulaşır. IP yönlendirme, paket sıralaması ve hata kontrolü ise TCP/IP başta olmak üzere çeşitli ağ protokolleri tarafından sağlanır. Her veri paketi, hedefe farklı yollardan ulaşabilir ve istemci tarafında yeniden birleştirilerek içerik oluşturulur. Bu sistem, ICANN gibi küresel otoriteler tarafından yönetilen bir adresleme ve protokol standardizasyonu ile işler; yani bir video akışı, aslında ışık hızında hareket eden binlerce paketin, onlarca protokol ve altyapı katmanıyla senkronize şekilde taşınmasıdır.
 
 
-Curriculum (Each lecture ~25 mins)
-Module 0: Introduction & Environment Setup
-• Lesson 0.1 — Welcome to the LLM Revolution
-• Course goals, what we will build
-• Why learn LLMs from scratch?
-• Open-source vs closed-source models (GPT-4 vs LLaMA 3)
-• Lesson 0.2 - Core Concepts: Autoregression, Transformers, Pretraining vs Fine-tuning
-• Lesson 0.3 - Setting Up Your Deep Learning Environment
-• Python, PyTorch, datasets, tiktoken, transformers
-• GPU on Colab / Kaggle
-Module 1: Data - The Fuel for LLMs
-• Lesson 1.1 - Understanding Text & The Role of Tokenization
-• Words, subwords, characters
-• BPE explained
-• Lesson 1.2 — Practical Tokenization with tiktoken
-• Encoding/decoding tokens
-• Vocabulary size, special tokens
+---
+
+### 🚀 Customize LLM 
+
+Curriculum :
+- Module 0: Introduction & Environment Setup
+  * Lesson 0.1 — Welcome to the LLM Revolution
+  *  Course goals, what we will build
+  * Why learn LLMs from scratch?
+  * Open-source vs closed-source models (GPT-4 vs LLaMA 3)
+  * Lesson 0.2 - Core Concepts: Autoregression, Transformers, Pretraining vs Fine-tuning
+  * Lesson 0.3 - Setting Up Your Deep Learning Environment
+  * Python, PyTorch, datasets, tiktoken, transformers
+  * GPU on Colab / Kaggle
+- Module 1: Data - The Fuel for LLMs
+  *  Lesson 1.1 - Understanding Text & The Role of Tokenization
+  *  Words, subwords, characters
+  *  BPE explained
+  *  Lesson 1.2 — Practical Tokenization with tiktoken
+  *  Encoding/decoding tokens
+  *  Vocabulary size, special tokens
 
 
 https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos : 
