@@ -497,213 +497,113 @@ ssh -L 8069:localhost:8069 debian-odoo
 
 ---
 
-## 🔄 Neural Network and Backpropagation Algorithm
-
-- **Nöron** Nedir?
-   Sayı tutan birimdir ve her nöron 0–1 arası bir aktivasyon değeri taşır. Giriş katmanında 784 nöron (28×28 piksellik her piksel için bir nöron).
-- **Aktivasyon** Nedir ?
-   Pikselin gri ton değeridir ve (0 = siyah, 1 = beyaz) nöronun aktivasyonu olur. Yüksek aktivasyon = o nöron “parlak” (aktiftir) düşünülür.
-
-
-Problemin Tanımı: 28×28 piksellik düşük çözünürlüklü el yazısı rakam görüntülerini (örneğin “3”) bilgisayarla otomatik tanımanın ne kadar zor olduğunu vurguluyor.
-İnsan Beyni–Bilgisayar Karşılaştırması: İnsan görsel korteksinin bu görevi nasıl zorlanmadan çözdüğünü, ancak bilgisayarda bunun “komik derecede” karmaşık bir problem hâline geldiğini örneklerle açıklar.
-**Öğrenme (Learning) Kavramı**
-Amaç: Bu on binlerce parametrenin “doğru” değerlerini otomatik olarak bulmak.
-
-
-..
-Öğrenme (Learning) Kavramı: soyut bir şeyi somutlandırmak sonucu gerçekleşir. Amaç , on binlerce parametrenin “doğru” değerlerini otomatik bir şekilde ve hızlı bir şekilde bulmaktır.
-
-
-Soyutlama Düzeyleri:
-İlk katman, Giriş Katmanı (Input Layer): Ham pikseller. 784 nöron.
-Orta katmanlar, Gizli Katmanlar (Hidden Layers): Kenar, köşe, döngü gibi alt-bileşenler. Örnekte iki gizli katman, her biri 16 nöron. Buradaki sayıların (16 gibi) ekran gösterimine uygun seçildiğini, uygulamada farklı boyut ve katman sayıları denenebileceğini vurguluyor.
-
-Çıkış katmanı(Output Layer): Bileşen kombinasyonlarından rakam tanıması , 10 nöron (0’dan 9’a kadar her rakam için bir nöron).
-
-Genel Amaç: Aynı yapı, farklı görüntü ve ses tanıma görevlerine de uyarlanabilir.
-
-
-**İleri Besleme Mekanizması (Forward Propagation)**
-- Her gizli katmandaki nöron, bir önceki katmandaki tüm nöronların aktivasyonlarıyla “bağlantılıdır”. Bu bağlantıların her birine bir **ağırlık (weight)** atanır ve  Bir nöronun, önceki katmandaki her bir nörondan gelen “sinyalleri” ne kadar önemseyeceğini belirler. **Kısaca** bir bağlantının “ne kadar güçlü” olduğunu belirler.
-- **Bias**, sonraki katmandaki nöron sayısı kadar tekil ek değerdir.  Nöronun “ne zaman” aktif olacağını kontrol eder (“Eşik” ayarı yapar) ; ağırlıklı toplam belli bir değeri aşmadan nöron kısmen hatta tamamen aktifleşmez.
-
-Bias ve weight parametreleri veriyle eğitim (training) aşamasında—örn. gradient descent yöntemiyle—otomatik olarak ayarlanır. Böylece ağımız, el yazısı rakamları tanımayı “öğrenir”.
-
-
-- Her katman atlaması için “önceki katmandaki nöron sayısı” ile “sonraki katmandaki nöron sayısı” çarpılır . Her **bağ**, bu formülle hesaplanır.
-- **Aktivasyon Fonksiyonu** : Toplam sonucu 0–1 aralığına “sıkıştırmak” (squash) için sigmoid (lojistik) fonksiyon kullanılır. Modern ağlarda sıklıkla ReLU (max(0, x)) tercih edilir; eğitimi kolaylaştırdığı için.
-
-- Her katman için : Parametre=(ağırlık sayısı)+(bias sayısı) 
-
-
-| Geçiş                           | Önceki katman | Sonraki katman | Ağırlık Matrisi Boyutu | Ağırlık sayısı    | Bias sayısı | Parametre  | Bias vektörü boyutu | Ara Toplam |
-| ------------------------------- | ------------- | -------------- | ---------------------- | ----------------- | ----------- | ---------- | ------------------- | ---------- |
-| Giriş → 1.Gizli katman          | 784 nöron     | 16 nöron       | (16, 784)              | 784 × 16 = 12 544 | 16          | 12 560     | (16, 1)             | 12 560     |
-| 1.Gizli katman → 2.Gizli katman | 16 nöron      | 16 nöron       | (16, 16)               | 16 × 16 = 256     | 16          | 272        | (16, 1)             | 272        |
-| 2.Gizli katman → Çıkış          | 16 nöron      | 10 nöron       | (10, 16)               | 16 × 10 = 160     | 10          | 170        | (10, 1)             | 170        |
-| **Genel Toplam**                |               |                |                        | **12 960**        | **42**      | **13 002** |                     | **13 002** |
-
-
-
+# 🌐 Neural Network and Backpropagation Algorithm 🤖🧠
 
 ---
 
-### 2. Backpropagation’ın Amacı
-
-* Ağırlıkları nasıl ayarlayacağımızı bulmak: Hangi ağırlık, hatayı ne kadar etkiliyor?
-* Amaç: Modelin tahmin hatasını (maliyeti) en aza indirmek.
-* Özetle:
-Sinir ağı önce “tamamen bilgisiz” başlar.
-Resimleri bir katmandan diğerine iletip tahmin eder.
-Tahminin ne kadar kötü olduğunu ölçer.
-Hangi yönde değişirse hatanın azalacağını (gradyanı) hesaplar.
-Ağırlıkları küçük adımlarla o yöne kaydırır.
-Döngüyü tekrar tekrar çalıştırarak ağı eğitir ve doğruluğunu artırır.
-Bu basit döngü—Tahmin → Hata → Gradyan → Güncelleme—sayesinde sinir ağı “öğrenir.”
-
-### 3. Adım Adım İşleyiş
-
-| Adım                       | Ne Yapıyoruz?                                                         |
-| -------------------------- | --------------------------------------------------------------------- |
-| 1. Tahmin (Forward Pass)   | Girdiyi ağdan geçirip çıktı değerini hesaplıyoruz.                    |
-| 2. Hata Hesaplama (Loss)   | Tahmin ile gerçek etiket arasındaki farkı ölçüyoruz (örn. kare fark). |
-| 3. Geri Yayılım (Backprop) | Hatanın her ağırlığa ne kadar etki ettiğini belirliyoruz.             |
-| 4. Ağırlık Güncelleme      | Ağırlıkları, hatayı azaltacak yönde küçük adımlarla güncelliyoruz.    |
-
-### 4. Basit Örnek Görseliyle
-
-1. **Girdi:** \[x₁, x₂]
-2. **Ağırlıklar:** \[w₁, w₂], **Bias:** b
-3. **Hesap:** z = w₁·x₁ + w₂·x₂ + b → **Aktivasyon:** a = sigmoid(z)
-4. **Hata:** (a − y)² (y gerçek etiket)
-5. **Geri Yayılım:** Hangi w₁ veya w₂ değişirse hata ne kadar değişir? Bu etkiyi hesapla.
-6. **Güncelle:** w ← w − η·(etki) (η = öğrenme hızı)
-
-### 5. Döngüyü Tekrarlama
-
-Her veri noktası veya mini-batch için:
-
-1. Tahmin
-2. Hata Hesaplama
-3. Geri Yayılım
-4. Ağırlık Güncelleme
-
-Bu dört adım tekrarlanarak ağ ‘öğrenir’ ve tahmin doğruluğu artar.
-
----  
-## 1. Ağ Yapısının Tanımı
-- Katman L-1: Bir nöron, aktivasyonu a^(L-1)
-- Katman L:   Bir nöron, aktivasyonu a^(L)
-- Parametreler:
-  - Ağırlık: w^(L)
-  - Bias:    b^(L)
+## 1. Nöron Nedir? ⚙️
+- **Tanım:** Sayı tutan birimdir ve her nöron 0–1 arası bir aktivasyon değeri taşır.  
+- **Giriş katmanı:** 784 nöron (28×28 piksellik her piksel için bir nöron)
 
 ---
 
-## 2. İleri Besleme (Forward Pass)
-1. Ağırlıklı Toplam  
-   z^(L) = w^(L) * a^(L-1) + b^(L)
-
-2. Aktivasyon  
-   a^(L) = sigma(z^(L))   (sigma = sigmoid veya ReLU)
-
-3. Maliyet (Tek Örnek)  
-   C0 = (a^(L) - y)^2      (y = hedef değer, 0 veya 1)
+## 2. Aktivasyon Nedir? 🌟
+- **Tanım:** Pikselin gri ton değeridir (0 = siyah, 1 = beyaz).  
+- **Anlamı:** Yüksek aktivasyon = o nöron “parlak” (aktiftir)
 
 ---
 
-## 3. Zincir Kuralı Genel Şeması
-- Amaç: dC0/dw^(L) hesaplamak  
-- Zincir Kuralı:  
-  dC0/dw^(L) = (dC0/da^(L)) * (da^(L)/dz^(L)) * (dz^(L)/dw^(L))
+## 3. Problemin Tanımı 🧐
+28×28 piksellik düşük çözünürlüklü el yazısı rakam görüntülerini (örneğin “3”) bilgisayarla otomatik tanımanın ne kadar zor olduğunu vurguluyor.  
+> **İnsan Beyni–Bilgisayar Karşılaştırması:** İnsan görsel korteksi bu görevi zorlanmadan çözer; bilgisayarda ise “komik derecede” karmaşık hale gelir.
 
 ---
 
-## 4. Maliyet Fonksiyonu (Cost Function)
-- One-hot kodlama: doğru etiket 1, diğerleri 0  
-- Ortalama Kare Hata (MSE):  
-  C = (1/N) * SUM_{i=1..N} SUM_{k=1..10} (a_k^(i) - y_k^(i))^2  
-- Hedef: C’yi minimize etmek
+## 4. Öğrenme (Learning) Kavramı 🚀
+Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.  
+**Amaç:** On binlerce parametrenin “doğru” değerlerini otomatik ve hızlı bir şekilde bulmak.
 
 ---
 
-## 5. Özet Adımlar
-1. Forward Pass: z → a → C hesapla  
-2. Zincir Kuralı:  
-   dC/dw = (dC/da) * (da/dz) * (dz/dw)  
-3. Ağırlıkları Güncelle:  
-   w ← w - η * (dC/dw)   (η = öğrenme hızı)
+## 5. Soyutlama Düzeyleri 🏗️
+- **Giriş Katmanı (Input Layer):** Ham pikseller. 784 nöron.  
+- **Gizli Katmanlar (Hidden Layers):** Kenar, köşe, döngü gibi alt-bileşenler.  
+  - Örnekte iki gizli katman, her biri 16 nöron.  
+- **Çıkış Katmanı (Output Layer):** Bileşen kombinasyonlarından rakam tanıması. 10 nöron (0–9).  
+
+> **Genel Amaç:** Aynı yapı, farklı görüntü ve ses tanıma görevlerine de uyarlanabilir.
 
 ---
 
-## 6. Öğrenme: Gradient Descent
-1. Gradyan: ∇_θ C = tüm parametreler için türev vektörü  
-2. Güncelleme Kuralı: θ ← θ - η * ∇_θ C  
-3. Yerel Minimum: rastgele başlangıç → “yeterince iyi” çözüme in
+## 6. İleri Besleme Mekanizması 🔄
+- Her gizli katmandaki nöron, önceki katmandaki tüm nöronların aktivasyonlarıyla “bağlantılıdır”.  
+- **Ağırlık (weight):** Sinyallerin gücünü belirler.  
+- **Bias:** Nöronun “ne zaman” aktif olacağını kontrol eden eşik ayarı.  
+
+> Eğitim aşamasında bias ve weight parametreleri gradient descent ile otomatik olarak ayarlanır.
 
 ---
 
-## 7. Backpropagation (Geri Yayılım)
+## 7. Parametre Hesabı 📊
+- Her katman atlaması için *önceki katmandaki nöron sayısı* × *sonraki katmandaki nöron sayısı* kadar bağlantı (weight).  
+- **Aktivasyon fonksiyonu:** Toplam sonucu 0–1 aralığına sıkıştırmak (sigmoid veya ReLU).  
+- **Toplam parametre sayısı:** weight sayısı + bias sayısı.  
 
-### 7.1 Zincir Kuralı (Chain Rule)
-Tek bir bağlantı için:  
-  dC/dw = (dC/da) * (da/dz) * (dz/dw)
-
-- dC/da = 2 * (a - y)  
-- da/dz = sigma'(z)  
-- dz/dw = a_onceki  
-
-### 7.2 Bias ve Önceki Aktivasyona Duyarlılık
-- Bias: dz/db = 1  
-- Geri yayılım:  
-  dC/da^(l-1) = (dC/dz^(l)) * W^(l)
-
-### 7.3 Çok Nöronlu Genel Durum
-- Katman L’de m nöron, L-1’de n nöron  
-- Ağırlık w^(L)_jk: k’nci nörondan j’nci nörona  
-- Türevi:  
-  dC0/dw^(L)_jk = (dC0/da^(L)_j) * sigma'(z^(L)_j) * a^(L-1)_k  
-- Önceki katmana dönüş:  
-  dC0/da^(L-1)_k = SUM_{j=1..m} [ w^(L)_jk * (dC0/da^(L)_j * sigma'(z^(L)_j)) ]
+| Geçiş                          | Önceki katman | Sonraki katman | Ağırlık Matrisi Boyutu | Ağırlık sayısı   | Bias sayısı | Parametre | Bias vektörü boyutu | Ara Toplam |
+| ------------------------------ | ------------- | -------------- | ---------------------- | ---------------- | ----------- | --------- | ------------------- | ---------- |
+| Giriş → 1. Gizli katman        | 784 nöron     | 16 nöron       | (16, 784)              | 784 × 16 = 12 544 | 16          | 12 560    | (16, 1)             | 12 560     |
+| 1. Gizli katman → 2. Gizli katman | 16 nöron  | 16 nöron       | (16, 16)               | 16 × 16 = 256     | 16          | 272       | (16, 1)             | 272        |
+| 2. Gizli katman → Çıkış        | 16 nöron      | 10 nöron       | (10, 16)               | 16 × 10 = 160     | 10          | 170       | (10, 1)             | 170        |
+| **Genel Toplam**               |               |                |                        | **12 960**        | **42**      | **13 002**|                     | **13 002** |
 
 ---
 
-## 8. Tüm Eğitim Verisi Üzerindeki Gradyan
-- Bir örnek için bulduğumuz dC0/dw değerlerini tüm örnekler için hesapla, ortala:  
-  dC/dw = (1/N) * SUM_{i=1..N} ( dCi/dw )  
-- Bu vektör, tüm parametreler için maliyetin duyarlılık haritasıdır
+## 8. Backpropagation’ın Amacı 🎯
+- **Amaç:** Hangi ağırlık, hatayı ne kadar etkiliyor?  
+- **Hedef:** Modelin tahmin hatasını (maliyeti) en aza indirmek.  
+> **Özet:** Tahmin → Hata → Gradyan → Güncelleme
 
 ---
 
-## 9. Güncelleme Adımı (Gradient Descent)
-- Her w ve b için:  
-  w ← w - η * (dC/dw)  
-  b ← b - η * (dC/db)  
-- η = öğrenme hızı (küçük adım)
+## 9. Adım Adım İşleyiş 🚶‍♀️
+| Adım | Ne Yapıyoruz?                                                                                 |
+| ---- | --------------------------------------------------------------------------------------------- |
+| 1    | **Tahmin (Forward Pass):** Girdiyi ağdan geçirip çıktı değerini hesaplıyoruz.                  |
+| 2    | **Hata Hesaplama (Loss):** Tahmin ile gerçek etiket arasındaki farkı ölçüyoruz (örn. kare fark). |
+| 3    | **Geri Yayılım (Backprop):** Hatanın her ağırlığa ne kadar etki ettiğini belirliyoruz.         |
+| 4    | **Ağırlık Güncelleme:** Ağırlıkları, hatayı azaltacak yönde küçük adımlarla güncelliyoruz.      |
 
 ---
 
-## 10. Özet Akış
-1. Forward Pass: z → a → C  
-2. Türevler: zincir kuralının 3 aşamasını çarp  
-3. Backprop: son katmandan geriye doğru tüm katmanları işle  
-4. Dataset Ortalaması: türevleri örnekler boyunca ortala  
-5. Güncelle: parametreleri gradyana göre değiştir  
-----
+## 10. Basit Örnek Görseliyle 🖼️
+- **Girdi:** `[x₁, x₂]`  
+- **Ağırlıklar:** `[w₁, w₂]`, **Bias:** `b`  
+- **Hesap:** `z = w₁·x₁ + w₂·x₂ + b` → `a = sigmoid(z)`  
+- **Hata:** `(a − y)²` (`y` = gerçek etiket)  
+- **Geri Yayılım:** Hangi `w₁` veya `w₂` değişirse hata ne kadar değişir?  
+- **Güncelleme:** `w ← w − η·(etki)` (`η` = öğrenme hızı)
 
+---
 
-Ek Kaynak :
-Ian Goodfellow, Yoshua Bengio & Aaron Courville – Deep Learning (MIT Press, 2016) Resmî kitap web sitesi ve PDF bölümleri: https://www.deeplearningbook.org/
-Michael Nielsen – Neural Networks and Deep Learning (online kitap, 2015) Tam metin ve etkileşimli alıştırmalar: https://neuralnetworksanddeeplearning.com/
-Stanford CS231n: Convolutional Neural Networks for Visual Recognition
-Ders notları ve slaytlar: http://cs231n.stanford.edu/
-YouTube video dersleri (2016–2020 arası): https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv
+## 11. Döngüyü Tekrarlama 🔁
+Her veri noktası veya mini-batch için:  
+1. Tahmin  
+2. Hata Hesaplama  
+3. Geri Yayılım  
+4. Ağırlık Güncelleme  
 
+> Bu dört adım tekrarlanarak ağ “öğrenir” ve tahmin doğruluğu artar.
 
+---
 
-
-
+## 📚 Ek Kaynaklar
+- **Ian Goodfellow, Yoshua Bengio & Aaron Courville** – *Deep Learning* (MIT Press, 2016)  
+  Resmî web sitesi ve PDF: https://www.deeplearningbook.org/  
+- **Michael Nielsen** – *Neural Networks and Deep Learning* (online kitap, 2015)  
+  Etkileşimli alıştırmalar: https://neuralnetworksanddeeplearning.com/  
+- **Stanford CS231n** – *Convolutional Neural Networks for Visual Recognition*  
+  Ders notları: http://cs231n.stanford.edu/  
+  Video dersleri: https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv  
 
 
 
