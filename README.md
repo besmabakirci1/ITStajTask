@@ -59,7 +59,7 @@ Selamlar 🌷
 
 4. **Python & Tasarım Desenleri**
 
-   * Kaynak: [Python & Design Patterns Playlist](https://www.youtube.com/playlist?list=PL7yh-TELLS1FuqLSjl5bgiQIEH25VEmIc)
+   * Kaynak: [Python & Design Patterns Playlist](https://www.youtube.com/playlist?list=PL7yh-TELLS1FuqLSjl5bgiQIEH25VEmIc) 🎧
    * Amaç: Magic Methods, Decorator, Generator, OOP, Design Patterns öğren
 
 ---
@@ -70,26 +70,20 @@ Selamlar 🌷
 
   * *(English)*
 
-    1. [https://youtu.be/i1G7PXZMnSc?si=45-LrjEc2QzKhU2W](https://youtu.be/i1G7PXZMnSc?si=45-LrjEc2QzKhU2W)
-    2. [https://youtu.be/aircAruvnKk?si=xkoGPEReRLA\_UZ56](https://youtu.be/aircAruvnKk?si=xkoGPEReRLA_UZ56)
-    3. [https://youtu.be/IHZwWFHWa-w?si=ilfRwZx-0I8Fniu8](https://youtu.be/IHZwWFHWa-w?si=ilfRwZx-0I8Fniu8)
-    4. [https://youtu.be/Ilg3gGewQ5U?si=uBw90JvWbqI09VZD](https://youtu.be/Ilg3gGewQ5U?si=uBw90JvWbqI09VZD)
+    1. [The Perceptron Explained](https://youtu.be/i1G7PXZMnSc?si=45-LrjEc2QzKhU2W)
+    2. [But what is a neural network? | Deep learning chapter 1](https://youtu.be/aircAruvnKk?si=xkoGPEReRLA_UZ56)
+    3. [Gradient descent, how neural networks learn | Deep Learning Chapter 2](https://youtu.be/IHZwWFHWa-w?si=ilfRwZx-0I8Fniu8)
+    4. [Backpropagation, intuitively | Deep Learning Chapter 3](https://youtu.be/Ilg3gGewQ5U?si=uBw90JvWbqI09VZD)
   * *(Turkish)*
 
-    1. [https://youtu.be/B5MmXmMMuvI?si=JZ4Yfmc\_MdsxPyhU](https://youtu.be/B5MmXmMMuvI?si=JZ4Yfmc_MdsxPyhU)
-    2. [https://youtu.be/5Lo\_HUDtxtw?si=DuZ1y9W11aRfIvrd](https://youtu.be/5Lo_HUDtxtw?si=DuZ1y9W11aRfIvrd)
-    3. [https://youtu.be/qrmaixHBrzU?si=sXHsC0A5XaXsJZId](https://youtu.be/qrmaixHBrzU?si=sXHsC0A5XaXsJZId)
+    1. [Neural Network 1 : Eğitime ve Kavramlara Giriş](https://youtu.be/B5MmXmMMuvI?si=JZ4Yfmc_MdsxPyhU)
+    2. [Neural Network 2: Perceptron Kavramı ve Öğrenme](https://youtu.be/5Lo_HUDtxtw?si=DuZ1y9W11aRfIvrd)
+    3. [Neural Network 3: Çok Katmanlı Yapay Sinir Ağları](https://youtu.be/qrmaixHBrzU?si=sXHsC0A5XaXsJZId)
 
 * **Download Ollama and choosing model upon the RAM criteria**
 
-  1. [https://youtu.be/UtSSMs6ObqY?si=xF7yTc1MQEP1tGZh](https://youtu.be/UtSSMs6ObqY?si=xF7yTc1MQEP1tGZh)
-  2. [https://youtu.be/bXf2Cxf3Wk0?si=kwTZ9U8uJjZ1VqZE](https://youtu.be/bXf2Cxf3Wk0?si=kwTZ9U8uJjZ1VqZE)
-
-  ```
-  bash
-  ```
-
-  CopyEdit
+  1. [Learn Ollama in 15 Minutes - Run LLM Models Locally for FREE](https://youtu.be/UtSSMs6ObqY?si=xF7yTc1MQEP1tGZh)
+  2. [Design Your Own Ollama Model Now!](https://youtu.be/bXf2Cxf3Wk0?si=kwTZ9U8uJjZ1VqZE)
 
   `ollama run deepseek-r1:8b`
 
@@ -120,7 +114,7 @@ Selamlar 🌷
 
 ## 🐍 Python Kavramları (2.0–9.0) (2.0–9.0) Python Kavramları (2.0–9.0)
 
-## 2.0 Magic Methods (Dunder Metotlar)
+### 2.0 Magic Methods (Dunder Metotlar)
 
 Python sınıflarının özel davranışlarını tanımlayan çift alt çizgiyle başlayan metotlardır.
 
@@ -147,11 +141,11 @@ class Vector:
 
 ---
 
-## 3.0 Decorator’lar
+### 3.0 Decorator’lar
 
 Fonksiyonların girişine/çıkışına dinamik davranış eklemeye yarar.
 
-### 3.1 Temel Decorator
+#### 3.1 Temel Decorator
 
 ```python
 def my_decorator(func):
@@ -174,7 +168,7 @@ hello_world()
 > 1. `@my_decorator` ile `hello_world` fonksiyonu `wrapper` ile sarılır.
 > 2. `wrapper` çalışırken önce ek işlem, sonra orijinal fonksiyon, en son ek işlem yapılır.
 
-### 3.2 Parametreli Decorator
+#### 3.2 Parametreli Decorator
 
 ```python
 def repeat(times):
@@ -200,7 +194,7 @@ greet("Besma")
 
 ---
 
-## 4.0 Tasarım Desenleri (Design Patterns)
+#### 4.0 Tasarım Desenleri (Design Patterns)
 
 Kodun modülerliğini ve genişletilebilirliğini artıran tekrarlanabilir çözümlerdir.
 
@@ -216,7 +210,7 @@ Kodun modülerliğini ve genişletilebilirliğini artıran tekrarlanabilir çöz
 
 ---
 
-## 5.0 ⚙️ Generator’lar
+#### 5.0 ⚙️ Generator’lar
 
 Bellek kullanımını minimuma indirerek "lazy evaluation" sağlar. Normal `return` yerine `yield` kullanır.
 
@@ -237,7 +231,7 @@ for val in cubes(5):
 
 ---
 
-## 6.0 Komut Satırı Argümanları
+#### 6.0 Komut Satırı Argümanları
 
 `sys.argv` ve `argparse` ile script’lere dışarıdan parametre ekler.
 
@@ -258,7 +252,7 @@ print(f"Merhaba {args.name}!")
 
 ---
 
-## 7.0 Kapsülleme & Veri Gizleme
+#### 7.0 Kapsülleme & Veri Gizleme
 
 Sınıf içi verileri korur ve dış erişimi kontrol eder.
 
@@ -285,7 +279,7 @@ class Person:
 
 ---
 
-## 8.0 Type Hinting
+#### 8.0 Type Hinting
 
 Kod okunabilirliğini ve statik analiz desteğini artırır.
 
@@ -305,9 +299,9 @@ print(toplam([1, 2, 3]))
 
 ---
 
-## 9.0 Detaylı Tasarım Desenleri
+### 9.0 Detaylı Tasarım Desenleri
 
-### 9.1 Factory Pattern
+#### 9.1 Factory Pattern
 
 ```python
 class IPerson:
@@ -503,7 +497,7 @@ ssh -L 8069:localhost:8069 debian-odoo
 
 ---
 
-## 🔄 Backpropagation Detaylı İncelemesi
+## 🔄 Neural Network and Backpropagation Algorithm
 
 ### 1. Ön Hazırlık: Sinir Ağı Nasıl Çalışır?
 
@@ -545,4 +539,35 @@ Her veri noktası veya mini-batch için:
 Bu dört adım tekrarlanarak ağ ‘öğrenir’ ve tahmin doğruluğu artar.
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
