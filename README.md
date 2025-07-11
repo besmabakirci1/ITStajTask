@@ -637,6 +637,56 @@ and My Notes :
 7. **Application** 🧑‍💻:
    - 🧾 End the user layer  
    - 🔚 Deal with last protocol  
+---
+
+
+
+Curriculum (Each lecture ~25 mins)
+Module 0: Introduction & Environment Setup
+• Lesson 0.1 — Welcome to the LLM Revolution
+• Course goals, what we will build
+• Why learn LLMs from scratch?
+• Open-source vs closed-source models (GPT-4 vs LLaMA 3)
+• Lesson 0.2 - Core Concepts: Autoregression, Transformers, Pretraining vs Fine-tuning
+• Lesson 0.3 - Setting Up Your Deep Learning Environment
+• Python, PyTorch, datasets, tiktoken, transformers
+• GPU on Colab / Kaggle
+Module 1: Data - The Fuel for LLMs
+• Lesson 1.1 - Understanding Text & The Role of Tokenization
+• Words, subwords, characters
+• BPE explained
+• Lesson 1.2 — Practical Tokenization with tiktoken
+• Encoding/decoding tokens
+• Vocabulary size, special tokens
+
+
+https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos : 
+MacOS
+Details
+The options from the Linux section above also work but Homebrew is recommended for basic usage.
+
+Homebrew in macOS
+Update homebrew and install pyenv:
+
+brew update
+brew install pyenv
+If you want to install (and update to) the latest development head of Pyenv rather than the latest release, instead run:
+
+brew install pyenv --head
+Then follow the rest of the post-installation steps, starting with Set up your shell environment for Pyenv.
+
+OPTIONAL. To fix brew doctor's warning ""config" scripts exist outside your system or Homebrew directories"
+
+If you're going to build Homebrew formulae from source that link against Python like Tkinter or NumPy (This is only generally the case if you are a developer of such a formula, or if you have an EOL version of MacOS for which prebuilt bottles are no longer provided and you are using such a formula).
+
+To avoid them accidentally linking against a Pyenv-provided Python, add the following line into your interactive shell's configuration:
+
+Bash/Zsh:
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+Fish:
+
+alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
 
 
 
