@@ -499,31 +499,23 @@ ssh -L 8069:localhost:8069 debian-odoo
 
 # 🌐 Neural Network and Backpropagation Algorithm 🤖🧠
 
----
 
 ## 1. Nöron Nedir? ⚙️
 - **Tanım:** Sayı tutan birimdir ve her nöron 0–1 arası bir aktivasyon değeri taşır.  
 - **Giriş katmanı:** 784 nöron (28×28 piksellik her piksel için bir nöron)
 
----
-
 ## 2. Aktivasyon Nedir? 🌟
 - **Tanım:** Pikselin gri ton değeridir (0 = siyah, 1 = beyaz).  
 - **Anlamı:** Yüksek aktivasyon = o nöron “parlak” (aktiftir)
-
----
 
 ## 3. Problemin Tanımı 🧐
 28×28 piksellik düşük çözünürlüklü el yazısı rakam görüntülerini (örneğin “3”) bilgisayarla otomatik tanımanın ne kadar zor olduğunu vurguluyor.  
 > **İnsan Beyni–Bilgisayar Karşılaştırması:** İnsan görsel korteksi bu görevi zorlanmadan çözer; bilgisayarda ise “komik derecede” karmaşık hale gelir.
 
----
-
 ## 4. Öğrenme (Learning) Kavramı 🚀
 Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.  
 **Amaç:** On binlerce parametrenin “doğru” değerlerini otomatik ve hızlı bir şekilde bulmak.
 
----
 
 ## 5. Soyutlama Düzeyleri 🏗️
 - **Giriş Katmanı (Input Layer):** Ham pikseller. 784 nöron.  
@@ -533,16 +525,12 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 
 > **Genel Amaç:** Aynı yapı, farklı görüntü ve ses tanıma görevlerine de uyarlanabilir.
 
----
-
 ## 6. İleri Besleme Mekanizması 🔄
 - Her gizli katmandaki nöron, önceki katmandaki tüm nöronların aktivasyonlarıyla “bağlantılıdır”.  
 - **Ağırlık (weight):** Sinyallerin gücünü belirler.  
 - **Bias:** Nöronun “ne zaman” aktif olacağını kontrol eden eşik ayarı.  
 
 > Eğitim aşamasında bias ve weight parametreleri gradient descent ile otomatik olarak ayarlanır.
-
----
 
 ## 7. Parametre Hesabı 📊
 - Her katman atlaması için *önceki katmandaki nöron sayısı* × *sonraki katmandaki nöron sayısı* kadar bağlantı (weight).  
@@ -556,14 +544,12 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 | 2. Gizli katman → Çıkış        | 16 nöron      | 10 nöron       | (10, 16)               | 16 × 10 = 160     | 10          | 170       | (10, 1)             | 170        |
 | **Genel Toplam**               |               |                |                        | **12 960**        | **42**      | **13 002**|                     | **13 002** |
 
----
 
 ## 8. Backpropagation’ın Amacı 🎯
 - **Amaç:** Hangi ağırlık, hatayı ne kadar etkiliyor?  
 - **Hedef:** Modelin tahmin hatasını (maliyeti) en aza indirmek.  
 > **Özet:** Tahmin → Hata → Gradyan → Güncelleme
 
----
 
 ## 9. Adım Adım İşleyiş 🚶‍♀️
 | Adım | Ne Yapıyoruz?                                                                                 |
@@ -573,8 +559,6 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 | 3    | **Geri Yayılım (Backprop):** Hatanın her ağırlığa ne kadar etki ettiğini belirliyoruz.         |
 | 4    | **Ağırlık Güncelleme:** Ağırlıkları, hatayı azaltacak yönde küçük adımlarla güncelliyoruz.      |
 
----
-
 ## 10. Basit Örnek Görseliyle 🖼️
 - **Girdi:** `[x₁, x₂]`  
 - **Ağırlıklar:** `[w₁, w₂]`, **Bias:** `b`  
@@ -582,8 +566,6 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 - **Hata:** `(a − y)²` (`y` = gerçek etiket)  
 - **Geri Yayılım:** Hangi `w₁` veya `w₂` değişirse hata ne kadar değişir?  
 - **Güncelleme:** `w ← w − η·(etki)` (`η` = öğrenme hızı)
-
----
 
 ## 11. Döngüyü Tekrarlama 🔁
 Her veri noktası veya mini-batch için:  
