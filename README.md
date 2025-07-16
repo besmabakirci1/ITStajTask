@@ -691,7 +691,14 @@ Fish:
 
 alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
 
+NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dediğini hatırla ..
+-----
 
+<img width="1080" height="718" alt="the transformer algorithm" src="https://github.com/user-attachments/assets/a6ffaa77-2e45-4147-8286-96b35dfe7675" />
+
+- Sıfırdan Python ile Tokenizer Kodlama
+
+- 
 
 
 
