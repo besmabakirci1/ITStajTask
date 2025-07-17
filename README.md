@@ -769,8 +769,8 @@ Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “activ
 
 
 NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dediğini hatırla ..
------
 
+---
 <img width="1080" height="718" alt="the transformer algorithm" src="https://github.com/user-attachments/assets/a6ffaa77-2e45-4147-8286-96b35dfe7675" />
 
 - Sıfırdan Python ile Tokenizer Kodlama
