@@ -662,15 +662,11 @@ Curriculum :
   *  Encoding/decoding tokens
   *  Vocabulary size, special tokens
 
-
-
 ````markdown
----
+
 # 🚀 macOS İçin Pyenv Kurulumu
 
 > **Öneri:** Homebrew, macOS’ta pyenv’in temel kullanımını kolaylaştırır.
-
----
 
 ## 🛠️ 1. Homebrew Güncelleme ve Pyenv Kurulumu
 
@@ -682,16 +678,12 @@ brew update
 brew install pyenv
 ````
 
----
-
 ##### 🔭 2. Geliştirme Başına (Development Head) Pyenv Kurulumu *(Opsiyonel)*
 
 ```bash
 # En son geliştirme sürümünü kurar
 brew install pyenv --head
 ```
-
----
 
 ##### 🔧 3. Kabuk Ortamını Ayarlama
 
@@ -705,7 +697,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 ```
 
----
 
 ##### 🛡️ 4. `brew doctor` Uyarısını Giderme *(Opsiyonel)*
 
@@ -723,12 +714,11 @@ fi
   alias brew="env PATH=(string replace (pyenv root)/shims '' \"$PATH\") brew"
   ```
 
----
-
 > **Kaynak:**
 > [pyenv · GitHub – Homebrew in macOS](https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos)
 
 ---
+
 ## Macte Ollama, Cpu ve Gpu arasındaki bağlantıyı anlamak : 
 > Apple Silicon (M1/M2/M3) üzerinde NVIDIA’ya özgü nvtop veya top -o gpu gibi araçlar çalışmadığı için GPU kullanımını CLI’dan izlemek için :
 #### 1. GUI: Activity Monitor – GPU History
