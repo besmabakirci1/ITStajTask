@@ -733,11 +733,7 @@ fi
 
 Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “active residency” (yani GPU’nun ne oranda meşgul olduğuna) dair tek seferlik bir anlık görüntü çıkarır:
 
-```bash
-sudo powermetrics --samplers gpu_power -i500 -n1 \
-  | grep "GPU active residency"
-
-```
+```sudo powermetrics --samplers gpu_power -i500 -n1 \ | grep "GPU active residency"```
 
 > Açıklama adım adım:
 > 
@@ -754,22 +750,16 @@ sudo powermetrics --samplers gpu_power -i500 -n1 \
 
 ##### 1. **PATH** sorununuzu çözmek için (eğer hâlâ `command not found` alıyorsanız):
     
-    ```bash
-    echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+    ```echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
     source ~/.zshrc
-    
-    ```
+     ```
     
 ##### 2. Ardından çalıştırın:
     
-    ```bash
-    sudo asitop
-    
-    ```
+    ```sudo asitop```
     
 
 > Açıklama:
-> 
 > - `asitop`, CPU (“E-cluster”/“P-cluster”), GPU (entegre), ANE (Apple Neural Engine) ve bellek kullanımını ayrı sütunlarda gösterir.
 > - Sürekli güncelleme ve grafiksel çubuklar sayesinde takip etmesi kolaydır. ([GitHub](https://github.com/tlkh/asitop?utm_source=chatgpt.com))
 
