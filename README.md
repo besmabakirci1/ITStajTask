@@ -663,33 +663,139 @@ Curriculum :
   *  Vocabulary size, special tokens
 
 
-https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos : 
-MacOS
-Details
-The options from the Linux section above also work but Homebrew is recommended for basic usage.
+Mühendise hanım, aşağıda GitHub README dosyanıza **süslü** ve **adım adım** ekleyebileceğiniz bir **macOS için Pyenv Kurulumu** bölümü bulacaksınız. Her kod bloğunun altına ne işe yaradığını ve nasıl kullanacağınızı açıklayan notlar ekledim.
 
-Homebrew in macOS
-Update homebrew and install pyenv:
+````markdown
+---
+# 🚀 macOS İçin Pyenv Kurulumu
 
+> **Öneri:** Homebrew, macOS’ta pyenv’in temel kullanımını kolaylaştırır.
+
+---
+
+## 🛠️ 1. Homebrew Güncelleme ve Pyenv Kurulumu
+
+```bash
+# Homebrew’ü günceller
 brew update
+
+# Pyenv’i yükler
 brew install pyenv
-If you want to install (and update to) the latest development head of Pyenv rather than the latest release, instead run:
+````
 
+---
+
+## 🔭 2. Geliştirme Başına (Development Head) Pyenv Kurulumu *(Opsiyonel)*
+
+```bash
+# En son geliştirme sürümünü kurar
 brew install pyenv --head
-Then follow the rest of the post-installation steps, starting with Set up your shell environment for Pyenv.
+```
 
-OPTIONAL. To fix brew doctor's warning ""config" scripts exist outside your system or Homebrew directories"
+---
 
-If you're going to build Homebrew formulae from source that link against Python like Tkinter or NumPy (This is only generally the case if you are a developer of such a formula, or if you have an EOL version of MacOS for which prebuilt bottles are no longer provided and you are using such a formula).
+## 🔧 3. Kabuk Ortamını Ayarlama
 
-To avoid them accidentally linking against a Pyenv-provided Python, add the following line into your interactive shell's configuration:
+```bash
+# Aşağıdaki satırları ~/.bashrc veya ~/.zshrc dosyanıza ekleyin
+if command -v pyenv 1>/dev/null 2>&1; then
+  # login shell için
+  eval "$(pyenv init --path)"
+  # interactive shell için
+  eval "$(pyenv init -)"
+fi
+```
 
-Bash/Zsh:
+---
 
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-Fish:
+## 🛡️ 4. `brew doctor` Uyarısını Giderme *(Opsiyonel)*
 
-alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
+> Bazı formüller Python’a link ederken yanlışlıkla pyenv tarafından sağlanan sürümü kullanırsa uyarı alırsınız.
+
+* **Bash/Zsh için:**
+
+  ```bash
+  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+  ```
+
+* **Fish için:**
+
+  ```fish
+  alias brew="env PATH=(string replace (pyenv root)/shims '' \"$PATH\") brew"
+  ```
+
+---
+
+> **Kaynak:**
+> [pyenv · GitHub – Homebrew in macOS](https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos)
+
+---
+##### Macte Ollama Cpu ve Gpu arasında bağlantı olduğunu anlamak : 
+> Apple Silicon (M1/M2/M3) üzerinde NVIDIA’ya özgü nvtop veya top -o gpu gibi araçlar çalışmadığı için GPU kullanımını CLI’dan izlemek için :
+## 1. GUI: Activity Monitor – GPU History
+
+1. **Activity Monitor**’ü açın (`Finder` → `Applications` → `Utilities` → **Activity Monitor**).
+2. Menüden **Window** → **GPU History** seçeneğini seçin.
+3. Burada entegre GPU’nuzun anlık yükünü grafiksel olarak görebilirsiniz.
+
+> Açıklama: En hızlı ve en dolaysız yöntemdir; root izni veya ekstra kurulum gerekmez.
+> 
+
+---
+
+## 2. CLI: `powermetrics` ile Tek Seferlik Anlık Ölçüm
+
+Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “active residency” (yani GPU’nun ne oranda meşgul olduğuna) dair tek seferlik bir anlık görüntü çıkarır:
+
+```bash
+sudo powermetrics --samplers gpu_power -i500 -n1 \
+  | grep "GPU active residency"
+
+```
+
+> Açıklama adım adım:
+> 
+> - `sudo`: root izni, çünkü `powermetrics` sistem seviyesinde çalışır.
+> - `-samplers gpu_power`: yalnızca GPU güç kullanım istatistiklerini toplar.
+> - `i500`: 500 ms (0.5 s) örnekleme aralığı.
+> - `n1`: tek örnek alıp komuttan çıkar.
+> - `grep "GPU active residency"`: yalnızca yüzde değeri içeren satırı filtreler. ([Stack Overflow](https://stackoverflow.com/questions/63881791/macos-get-gpu-history-usage-from-terminal?utm_source=chatgpt.com), [OS X Daily](https://osxdaily.com/2024/07/05/how-to-see-individual-core-cpu-usage-on-mac-with-powermetrics/?utm_source=chatgpt.com))
+
+---
+
+## 3. CLI: `asitop` ile Canlı Terminal Arayüzü
+
+`asitop`, `powermetrics`’i arka planda kullanarak renkli, sürekli güncellenen bir terminal arayüzü sunar.
+
+1. **PATH** sorununuzu çözmek için (eğer hâlâ `command not found` alıyorsanız):
+    
+    ```bash
+    echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
+    
+    ```
+    
+2. Ardından çalıştırın:
+    
+    ```bash
+    sudo asitop
+    
+    ```
+    
+
+> Açıklama:
+> 
+> - `asitop`, CPU (“E-cluster”/“P-cluster”), GPU (entegre), ANE (Apple Neural Engine) ve bellek kullanımını ayrı sütunlarda gösterir.
+> - Sürekli güncelleme ve grafiksel çubuklar sayesinde takip etmesi kolaydır. ([GitHub](https://github.com/tlkh/asitop?utm_source=chatgpt.com))
+
+---
+
+> Terminale **top -o cpu** yazarak CPU hareketlerini görebilirsiniz.
+
+
+
+
+---
 
 NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dediğini hatırla ..
 -----
