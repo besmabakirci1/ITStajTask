@@ -684,7 +684,7 @@ brew install pyenv
 
 ---
 
-## 🔭 2. Geliştirme Başına (Development Head) Pyenv Kurulumu *(Opsiyonel)*
+##### 🔭 2. Geliştirme Başına (Development Head) Pyenv Kurulumu *(Opsiyonel)*
 
 ```bash
 # En son geliştirme sürümünü kurar
@@ -693,7 +693,7 @@ brew install pyenv --head
 
 ---
 
-## 🔧 3. Kabuk Ortamını Ayarlama
+##### 🔧 3. Kabuk Ortamını Ayarlama
 
 ```bash
 # Aşağıdaki satırları ~/.bashrc veya ~/.zshrc dosyanıza ekleyin
@@ -707,7 +707,7 @@ fi
 
 ---
 
-## 🛡️ 4. `brew doctor` Uyarısını Giderme *(Opsiyonel)*
+##### 🛡️ 4. `brew doctor` Uyarısını Giderme *(Opsiyonel)*
 
 > Bazı formüller Python’a link ederken yanlışlıkla pyenv tarafından sağlanan sürümü kullanırsa uyarı alırsınız.
 
@@ -729,20 +729,19 @@ fi
 > [pyenv · GitHub – Homebrew in macOS](https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos)
 
 ---
-##### Macte Ollama Cpu ve Gpu arasında bağlantı olduğunu anlamak : 
+## Macte Ollama, Cpu ve Gpu arasındaki bağlantıyı anlamak : 
 > Apple Silicon (M1/M2/M3) üzerinde NVIDIA’ya özgü nvtop veya top -o gpu gibi araçlar çalışmadığı için GPU kullanımını CLI’dan izlemek için :
-## 1. GUI: Activity Monitor – GPU History
+#### 1. GUI: Activity Monitor – GPU History
 
 1. **Activity Monitor**’ü açın (`Finder` → `Applications` → `Utilities` → **Activity Monitor**).
 2. Menüden **Window** → **GPU History** seçeneğini seçin.
 3. Burada entegre GPU’nuzun anlık yükünü grafiksel olarak görebilirsiniz.
 
 > Açıklama: En hızlı ve en dolaysız yöntemdir; root izni veya ekstra kurulum gerekmez.
-> 
 
 ---
 
-## 2. CLI: `powermetrics` ile Tek Seferlik Anlık Ölçüm
+#### 2. CLI: `powermetrics` ile Tek Seferlik Anlık Ölçüm
 
 Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “active residency” (yani GPU’nun ne oranda meşgul olduğuna) dair tek seferlik bir anlık görüntü çıkarır:
 
@@ -762,11 +761,11 @@ sudo powermetrics --samplers gpu_power -i500 -n1 \
 
 ---
 
-## 3. CLI: `asitop` ile Canlı Terminal Arayüzü
+#### 3. CLI: `asitop` ile Canlı Terminal Arayüzü
 
 `asitop`, `powermetrics`’i arka planda kullanarak renkli, sürekli güncellenen bir terminal arayüzü sunar.
 
-1. **PATH** sorununuzu çözmek için (eğer hâlâ `command not found` alıyorsanız):
+##### 1. **PATH** sorununuzu çözmek için (eğer hâlâ `command not found` alıyorsanız):
     
     ```bash
     echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
@@ -774,7 +773,7 @@ sudo powermetrics --samplers gpu_power -i500 -n1 \
     
     ```
     
-2. Ardından çalıştırın:
+##### 2. Ardından çalıştırın:
     
     ```bash
     sudo asitop
@@ -787,14 +786,10 @@ sudo powermetrics --samplers gpu_power -i500 -n1 \
 > - `asitop`, CPU (“E-cluster”/“P-cluster”), GPU (entegre), ANE (Apple Neural Engine) ve bellek kullanımını ayrı sütunlarda gösterir.
 > - Sürekli güncelleme ve grafiksel çubuklar sayesinde takip etmesi kolaydır. ([GitHub](https://github.com/tlkh/asitop?utm_source=chatgpt.com))
 
----
 
-> Terminale **top -o cpu** yazarak CPU hareketlerini görebilirsiniz.
-
+### Terminale **top -o cpu** yazarak CPU hareketlerini görebilirsiniz.
 
 
-
----
 
 NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dediğini hatırla ..
 -----
