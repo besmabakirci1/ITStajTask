@@ -704,14 +704,14 @@ fi
 
 * **Bash/Zsh için:**
 
-  ```bash
-  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-  ```
+```
+      alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+```
 
 * **Fish için:**
 
-  ```fish
-  alias brew="env PATH=(string replace (pyenv root)/shims '' \"$PATH\") brew"
+  ```
+      alias brew="env PATH=(string replace (pyenv root)/shims '' \"$PATH\") brew"
   ```
 
 > **Kaynak:**
@@ -750,13 +750,16 @@ Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “activ
 
 ##### 1. **PATH** sorununuzu çözmek için (eğer hâlâ `command not found` alıyorsanız):
     
-    ```echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+ ```
+    echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
     source ~/.zshrc
-     ```
+ ```
     
 ##### 2. Ardından çalıştırın:
     
-    ```sudo asitop```
+  ```
+    sudo asitop
+   ```
     
 
 > Açıklama:
