@@ -729,8 +729,6 @@ fi
 
 > Açıklama: En hızlı ve en dolaysız yöntemdir; root izni veya ekstra kurulum gerekmez.
 
----
-
 #### 2. CLI: `powermetrics` ile Tek Seferlik Anlık Ölçüm
 
 Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “active residency” (yani GPU’nun ne oranda meşgul olduğuna) dair tek seferlik bir anlık görüntü çıkarır:
@@ -749,7 +747,6 @@ sudo powermetrics --samplers gpu_power -i500 -n1 \
 > - `n1`: tek örnek alıp komuttan çıkar.
 > - `grep "GPU active residency"`: yalnızca yüzde değeri içeren satırı filtreler. ([Stack Overflow](https://stackoverflow.com/questions/63881791/macos-get-gpu-history-usage-from-terminal?utm_source=chatgpt.com), [OS X Daily](https://osxdaily.com/2024/07/05/how-to-see-individual-core-cpu-usage-on-mac-with-powermetrics/?utm_source=chatgpt.com))
 
----
 
 #### 3. CLI: `asitop` ile Canlı Terminal Arayüzü
 
