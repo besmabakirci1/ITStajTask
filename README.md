@@ -663,7 +663,6 @@ Curriculum :
   *  Vocabulary size, special tokens
 
 
-Mühendise hanım, aşağıda GitHub README dosyanıza **süslü** ve **adım adım** ekleyebileceğiniz bir **macOS için Pyenv Kurulumu** bölümü bulacaksınız. Her kod bloğunun altına ne işe yaradığını ve nasıl kullanacağınızı açıklayan notlar ekledim.
 
 ````markdown
 ---
