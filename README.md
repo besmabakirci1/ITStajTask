@@ -698,7 +698,7 @@ NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dedi
 
 - Sıfırdan Python ile Tokenizer Kodlama
 
-- 
+- byte pair encoding algorithm , dil bilgisini yok sayar
 
 
 
