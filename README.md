@@ -701,4 +701,12 @@ NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dedi
 - byte pair encoding algorithm , dil bilgisini yok sayar
 
 
+Bir dil modeli eğitimi sırasında girilen dizinin context length’ten kısa olduğu durumlarda ne yapılır?
+
+- Dizinin sonuna padding tokenlari eklenir.
+
+MNİSt data set 
+https://www.kaggle.com/code/annisin/classification-task
+
+
 
