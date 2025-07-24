@@ -928,14 +928,17 @@ def word_level_tokenize(text):
     return text.split()
 
 print(word_level_tokenize("Merhaba dünya, bugün nasılsın?"))
+```
 # Çıktı: ['Merhaba', 'dünya,', 'bugün', 'nasılsın?']
 Ne yapar? Metni boşluk karakterinden bölerek kelimeleri çıkarır.
 Nasıl çalıştırılır? Python 3 yüklü bir ortamda bu fonksiyonu içeren dosyayı çalıştırabilirsiniz.
 Character-Level Tokenization (Karakter Düzeyi)
+```python
 def character_level_tokenize(text):
     return list(text)
 
 print(character_level_tokenize("ABC"))
+```
 # Çıktı: ['A', 'B', 'C']
 Ne yapar? Her karakteri ayrı bir token olarak işler.
 Ne zaman tercih edilir? Dilin çok ince detaylarına girmek gerektiğinde; ancak eğitim maliyeti artar.
