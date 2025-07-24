@@ -774,19 +774,243 @@ Terminal’den aşağıdaki komut, 0.5 saniyelik bir örnekleme ile GPU “activ
 NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dediğini hatırla ..
 
 ---
-<img width="1080" height="718" alt="the transformer algorithm" src="https://github.com/user-attachments/assets/a6ffaa77-2e45-4147-8286-96b35dfe7675" />
-
-- Sıfırdan Python ile Tokenizer Kodlama
-
-- byte pair encoding algorithm , dil bilgisini yok sayar
-
-
-Bir dil modeli eğitimi sırasında girilen dizinin context length’ten kısa olduğu durumlarda ne yapılır?
-
-- Dizinin sonuna padding tokenlari eklenir.
-
-MNİSt data set 
-https://www.kaggle.com/code/annisin/classification-task
 
 
 
+
+
+## LLM’in Temel Unsurları
+
+1. **Veri Kümesinin Hacmi**  
+   - Modelin “öğreneceği” örnek sayısı; genellikle milyarlarca token.  
+2. **Transformer Mimarisi**  
+   - Modelin katman yapısı, dikkat (attention) mekanizmaları, besleme (feed‑forward) blokları.
+
+---
+
+## Transformer Mimarisi
+
+Transformer, tüm cümleye aynı anda bakar ve kelimeler arasındaki bağları “attention” ile öğrenir.  
+Daha detaylı bilgi biçin lütfen makaleyi inceleyin:  
+> [Vaswani et al., “Attention is All You Need”]((https://github.com/user-attachments/files/21395756/NIPS-2017-attention-is-all-you-need-Paper.pdf))
+
+![Transformer Şeması](https://github.com/user-attachments/assets/2df429b7-930b-407b-942e-33574005f8db)
+
+---
+
+## Temel Bileşenler
+
+- **Tokenizasyon**  
+  Ham metni, anlamlı parçalara ayırma işlemi.  
+- **Embedding**  
+  Token’ları vektörlere (sayı dizilerine) dönüştürme.  
+- **Positional Encoding**  
+  Token’ların pozisyon bilgilerini modele ekleme.  
+- **Attention (Dikkat)**  
+  Hangi token’ın hangi token’la ne kadar ilişkili olduğunu hesaplama.  
+- **Katman (Layer)**  
+  Bilgiyi derinleştiren, sırayla uygulanan bloklar.  
+- **Feed‑Forward**  
+  Her katmanda bilinçli öğrenmeyi pekiştiren tam bağlı (dense) ağ bloğu.  
+
+—
+
+## Tokenizasyon Nedir?
+“Token is an integer that represents a character, or a short segment of characters…”
+Ham metni, modelin “anlayabileceği” küçük parçalara (token) bölme işlemidir.  
+Örnek:  
+> “Merhaba dünya” → `[“Merhaba”, “dünya”]` veya `[“Mer”, “haba”, “dün”, “ya”]`
+
+### Tipleri
+
+#### 1. Word-Level Tokenization (Kelime Düzeyi)
+
+```python
+def word_level_tokenize(text):
+    # Metni boşluklardan bölerek kelime dizisi döner
+    return text.split()
+
+print(word_level_tokenize("Merhaba dünya, bugün nasılsın?"))
+# → ['Merhaba', 'dünya,', 'bugün', 'nasılsın?']
+```
+
+Açıklama:
+Boşlukları ayırır.
+Noktalama işaretleri ayrı token olarak kalabilir.
+Basit ama nadir kelimelerde sözlük dışı (OOV) sorunu yaşanır.
+2. Character-Level Tokenization (Karakter Düzeyi)
+def character_level_tokenize(text):
+    # Metni karakter bazlı listeye dönüştürür
+    return list(text)
+
+print(character_level_tokenize("Merhaba"))
+# → ['M', 'e', 'r', 'h', 'a', 'b', 'a']
+
+Açıklama:
+Her harfi ayrı token olarak işler.
+OOV sorunu yoktur ama sıralı anlam çıkarımı zorlaşır.
+3. Subword Tokenization (Alt-Parça Düzeyi)
+Kelimeyi, hem anlamlı hem de sık görülen parçalara böler.
+Örnek: “bilinmeyen” → [“▁bil”, “in”, “me”, “yen”]
+Avantaj:
+Daha önce görülmemiş kelimelerle karşılaşıldığında parçalar üzerinden genel anlam tahmini yapılabilir.
+
+Subword Tokenizasyon Algoritmaları
+Byte‑Pair Encoding (BPE) : Dil bilgisini göz ardı eder, sadece istatistiksel tekrar sıklığına dayanır.  
+    Kullanıldığı Modeller: GPT‑2, GPT‑3 vb.
+    Adımlar:
+-      Tüm kelimeleri harf harf ayırın.
+-      En sık tekrar eden harf çiftini bulun.
+-      Bu çifti birleştirin, yeni token ekleyin.
+Tekrar ederek istenen sözlük boyutuna ulaşın.
+
+Örnek: Hugging Face GPT‑2 Tokenizer
+from transformers import GPT2Tokenizer
+
+# GPT-2 önceden eğitilmiş tokenizasyon kütüphanesini yükler
+```
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
+text = "bilinmeyen kelime"
+tokens = tokenizer.tokenize(text)
+ids = tokenizer.convert_tokens_to_ids(tokens)
+
+print("Tokens:", tokens)
+print("IDs:", ids)
+```
+Açıklama:
+tokenize() metni alt‑parçalara böler.
+convert_tokens_to_ids() her bir token’a sayısal ID atar.
+Bu sayede model, nümerik verilerle işlem yapabilir.
+
+---
+
+## Context Length Altında Padding
+
+Bir dil modeli eğitimi sırasında girilen dizi, modelin `context_length` parametresinden (örn. 512 token) kısa ise:
+
+- **Çözüm**: Dizinin sonuna özel `<PAD>` token’ları eklenir.  
+- **Neden?**: Modelin sabit uzunlukta giriş beklemesi nedeniyle; aynı boyda tensörler oluşturulur.  
+
+*Bir dil modeli eğitimi sırasında girilen dizinin context length’ten kısa olduğu durumlarda ne yapılır?*
+
+      - Dizinin sonuna padding tokenlari eklenir.
+
+
+## MNIST Data Set
+
+- **Kaynak**: [Kaggle – MNIST Handwritten Digits Classification][1]  
+- **Özellik**: 60.000 eğitim, 10.000 test örneği; 28×28 gri tonlamalı el yazısı rakam görüntüleri.
+
+
+
+
+--
+
+## Tokenizasyon Nedir?
+
+Tokenizasyon, modelin anlayabileceği **tamsayısal** temsillere dönüştürmek için ham metni daha küçük parçalara (token’lara) ayırma işlemidir.  
+Transformer tabanlı modeller metni doğrudan anlamaz; sayı ile işlem yaparlar. Bu yüzden:
+
+> “Token is an integer that represents a character, or a short segment of characters…”  
+> — Tokenizer modülünün tanımı
+
+Örnek:
+"Merhaba dünya" → ["Merhaba", "dünya"] veya ["Mer", "haba", "dü", "nya"]
+---
+
+## Tokenizasyon Türleri
+
+### Word-Level Tokenization (Kelime Düzeyi)
+
+```python
+def word_level_tokenize(text):
+    return text.split()
+
+print(word_level_tokenize("Merhaba dünya, bugün nasılsın?"))
+# Çıktı: ['Merhaba', 'dünya,', 'bugün', 'nasılsın?']
+Ne yapar? Metni boşluk karakterinden bölerek kelimeleri çıkarır.
+Nasıl çalıştırılır? Python 3 yüklü bir ortamda bu fonksiyonu içeren dosyayı çalıştırabilirsiniz.
+Character-Level Tokenization (Karakter Düzeyi)
+def character_level_tokenize(text):
+    return list(text)
+
+print(character_level_tokenize("ABC"))
+# Çıktı: ['A', 'B', 'C']
+Ne yapar? Her karakteri ayrı bir token olarak işler.
+Ne zaman tercih edilir? Dilin çok ince detaylarına girmek gerektiğinde; ancak eğitim maliyeti artar.
+Subword Tokenization (Alt Parça Düzeyi)
+Kelime ve karakter düzeyleri arasında bir denge sağlar.
+Örnek: "bilinmeyen"
+→ ["▁bil", "in", "me", "yen"]
+
+Avantajı: Nadir kelimelerde bile parçalar tanınır; “unk” token sayısı azalır.
+
+Subword Tokenizasyon Algoritmaları
+Byte-Pair Encoding (BPE)
+from transformers import GPT2Tokenizer
+
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
+text  = "bilinmeyen kelime"
+tokens = tokenizer.tokenize(text)
+ids    = tokenizer.convert_tokens_to_ids(tokens)
+
+print("Tokens:", tokens)
+print("IDs:", ids)
+Ne yapar?
+Karakterleri ayırır,
+En sık görülen çiftleri birleştirir,
+Yeni token’lar oluşturur.
+Nasıl kullanılır? transformers kütüphanesini pip ile yükleyip (pip install transformers) bu kodu çalıştırın.
+WordPiece
+from transformers import BertTokenizer
+
+tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+
+text  = "bilinmeyen kelime"
+tokens = tokenizer.tokenize(text)
+ids    = tokenizer.convert_tokens_to_ids(tokens)
+
+print("Tokens:", tokens)
+print("IDs:", ids)
+Farkı: BPE yerine olasılığa dayalı seçim yapar.
+Adımlar:
+Karakterleri ayırır,
+Parçaların birlikte görülme olasılıklarını hesaplar,
+En yüksek olasılıklı birleşimleri gerçekleştirir.
+SentencePiece
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("google/mt5-small")
+
+text  = "bilinmeyen kelime"
+tokens = tokenizer.tokenize(text)
+ids    = tokenizer.convert_tokens_to_ids(tokens)
+
+print("Tokens:", tokens)
+print("IDs:", ids)
+Özellikleri:
+Ön işlem yapmadan, bütün metni bir dize gibi ele alır.
+Boşlukları özel karakter (_) ile temsil eder.
+Kullanım alanı: Çok dilli veya morfolojik olarak zengin dillerde.
+
+Token ID’leri ve Vocabulary Nedir?
+Token → ID dönüşümü: Model sayılarla çalışır.
+Her modelin bir vocabulary dosyası (sözlüğü) vardır.
+Token’lar eğitim ve çıkarım aşamasında bu ID’ler üzerinden işlenir.
+
+Tokenizer ve Detokenizer Nedir?
+Tokenizer: Metni token’lara bölüp ID’lere çevirir.
+Detokenizer: Model çıktısı ID’leri tekrar metne dönüştürür.
+Akış:
+Metin
+  └─ Tokenizer → [token1, token2, …]
+      └─ Numeralizasyon → [id1, id2, …]
+          └─ Model çalışır
+              └─ Detokenizer ile [id1, …] → [token1, …]
+                  └─ Metni tekrar oluşturur
+
+Neden Tokenizasyon Bu Kadar Önemli?
+Modelin kapasitesi, nadiren görülen kelimeleri tanıma ve genel başarımı büyük ölçüde buna bağlıdır.
+Türkçe gibi eklemeli dillerde subword tokenizasyonu kritik avantaj sağlar.
