@@ -33,7 +33,9 @@ Selamlar 🌷
      | Ağ Adaptörü     | NAT                         |
 
      > **Açıklama:** Bellek ve depolama, derleme süreçleri için yeterli olmalıdır.
-   * SSH: `openssh-server` kurup, `ssh kullanıcı@<VM_IP>` ile bağlan
+   * SSH : `openssh-server` kurup, `ssh kullanıcı@<VM_IP>` ile bağlan
+   * link :[https://chatgpt.com/share/685aa279-9c50-800e-aba7-1a678d55750b]
+   * link : [https://chatgpt.com/c/686d5030-8cc4-800e-ae51-028f25d8afb6]
 
 2. **E‑Ticaret Sitesi (Odoo Tabanlı)**
 
