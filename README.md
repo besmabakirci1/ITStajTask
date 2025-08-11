@@ -499,7 +499,11 @@ ssh -L 8069:localhost:8069 debian-odoo
 
 
 # 🌐 Neural Network and Backpropagation Algorithm 🤖🧠
+![Biyolojik ve Yapay Nöron](https://github.com/user-attachments/assets/17b7f50a-632a-480e-9968-2de823137be0)
+- <caption><b>Şekil 1.</b> Sol: İnsan beynindeki biyolojik nöron yapısı. Sağ: Benzer işlevleri taklit eden yapay sinir ağı mimarisi.</caption>
 
+![Biyolojik ve Yapay Nöron](https://github.com/user-attachments/assets/8bf57052-03b2-46e5-9918-24f403e1ac0b)
+- <caption><b>Şekil 2.</b> (a) Biyolojik nöronun yapısı, (b) Yapay nöronun matematiksel modeli, (c) Çok katmanlı yapay sinir ağı.</caption>
 
 ### 1. Nöron Nedir? ⚙️
 - **Tanım:** Sayı tutan birimdir ve her nöron 0–1 arası bir aktivasyon değeri taşır.  
@@ -551,6 +555,8 @@ Soyut bir şeyi somutlaştırmak sonucu gerçekleşir.
 - **Hedef:** Modelin tahmin hatasını (maliyeti) en aza indirmek.  
 > **Özet:** Tahmin → Hata → Gradyan → Güncelleme
 
+![Gradient Descent](https://github.com/user-attachments/assets/fc6ecc38-c3a6-4a49-ae62-0e28e6e3a4bf)
+<caption><b>Şekil 1.</b> Gradyan yönünde (türev işareti boyunca) küçük adımlarla ağırlıkların güncellenmesi ve maliyetin (cost) en aza indirilmesi.</caption>
 
 ### 9. Adım Adım İşleyiş 🚶‍♀️
 | Adım | Ne Yapıyoruz?                                                                                 |
@@ -576,6 +582,11 @@ Her veri noktası veya mini-batch için:
 4. Ağırlık Güncelleme  
 
 > Bu dört adım tekrarlanarak ağ “öğrenir” ve tahmin doğruluğu artar.
+
+
+![Loss Landscape](https://github.com/user-attachments/assets/444665a0-637e-4487-b34c-ff7d31048697)
+<caption><b>Şekil 2.</b> Çok boyutlu kayıp yüzeyinde (loss landscape) optimizasyonun izlediği yol; yerel minimumlar, eyer noktaları ve zor bölgeler.</caption>
+
 
 
 #### 📚 Ek Kaynaklar
@@ -818,7 +829,7 @@ Daha detaylı bilgi biçin lütfen makaleyi inceleyin:
 —
 <img width="2385" height="1179" alt="image" src="https://github.com/user-attachments/assets/4b88b1fc-542d-4769-9bb0-f5ac0b810163" />
 
-## Tokenizasyon Nedir?
+## 💡 Tokenizasyon Nedir?
 “Token is an integer that represents a character, or a short segment of characters…”
 Ham metni, modelin “anlayabileceği” küçük parçalara (token) bölme işlemidir.  
 Örnek:  
@@ -1001,12 +1012,12 @@ print("IDs:", ids)
 Boşlukları özel karakter (_) ile temsil eder.
 Kullanım alanı: Çok dilli veya morfolojik olarak zengin dillerde.
 
-Token ID’leri ve Vocabulary Nedir?
+### Token ID’leri ve Vocabulary Nedir?
 Token → ID dönüşümü: Model sayılarla çalışır.
 Her modelin bir vocabulary dosyası (sözlüğü) vardır.
 Token’lar eğitim ve çıkarım aşamasında bu ID’ler üzerinden işlenir.
 
-Tokenizer ve Detokenizer Nedir?
+### 💡 Tokenizer ve Detokenizer Nedir?
 Tokenizer: Metni token’lara bölüp ID’lere çevirir.
 Detokenizer: Model çıktısı ID’leri tekrar metne dönüştürür.
 Akış:
@@ -1017,6 +1028,43 @@ Metin
               └─ Detokenizer ile [id1, …] → [token1, …]
                   └─ Metni tekrar oluşturur
 
-Neden Tokenizasyon Bu Kadar Önemli?
+### Neden Tokenizasyon Bu Kadar Önemli?
 Modelin kapasitesi, nadiren görülen kelimeleri tanıma ve genel başarımı büyük ölçüde buna bağlıdır.
 Türkçe gibi eklemeli dillerde subword tokenizasyonu kritik avantaj sağlar.
+
+
+
+
+
+## yapay zeka eğitebilmemiz için etiketli verilere ihtiyaç duyarız (Supervised Learning)
+Supervised Learning, yapay zekanın geçmişteki etiketli verilerden öğrenerek gelecekteki veriler için doğru tahminler yapabilmesini sağlayan bir makine öğrenmesi yöntemidir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
