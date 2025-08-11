@@ -805,7 +805,7 @@ NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dedi
 
 Transformer, tüm cümleye aynı anda bakar ve kelimeler arasındaki bağları “attention” ile öğrenir.  
 Daha detaylı bilgi biçin lütfen makaleyi inceleyin:  
-> [Vaswani et al., “Attention is All You Need”]((https://github.com/user-attachments/files/21395756/NIPS-2017-attention-is-all-you-need-Paper.pdf))
+[Vaswani et al., “Attention is All You Need”]((https://github.com/user-attachments/files/21395756/NIPS-2017-attention-is-all-you-need-Paper.pdf))
 
 ![Transformer Şeması](https://github.com/user-attachments/assets/2df429b7-930b-407b-942e-33574005f8db)
 
