@@ -781,7 +781,7 @@ NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dedi
 
 
 
-## LLM’in Temel Unsurları
+## 📚 LLM’in Temel Unsurları
 
 1. **Veri Kümesinin Hacmi**  
    - Modelin “öğreneceği” örnek sayısı; genellikle milyarlarca token.  
@@ -790,7 +790,7 @@ NOT : YUKARIYA nöroloji sinaps fln fotoğrafı eklenmeli .. murat hocanın dedi
 
 ---
 
-## Transformer Mimarisi
+## 📚 Transformer Mimarisi
 
 Transformer, tüm cümleye aynı anda bakar ve kelimeler arasındaki bağları “attention” ile öğrenir.  
 Daha detaylı bilgi biçin lütfen makaleyi inceleyin:  
@@ -816,6 +816,7 @@ Daha detaylı bilgi biçin lütfen makaleyi inceleyin:
   Her katmanda bilinçli öğrenmeyi pekiştiren tam bağlı (dense) ağ bloğu.  
 
 —
+<img width="2385" height="1179" alt="image" src="https://github.com/user-attachments/assets/4b88b1fc-542d-4769-9bb0-f5ac0b810163" />
 
 ## Tokenizasyon Nedir?
 “Token is an integer that represents a character, or a short segment of characters…”
