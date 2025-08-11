@@ -1042,6 +1042,16 @@ Supervised Learning, yapay zekanın geçmişteki etiketli verilerden öğrenerek
 
 
 
+Rotary Positional Encoding'in (RoPE), daha eski konum kodlama yöntemlerine göre en temel avantajı kelimelerin birbirlerine olan göreceli konumlarini ve mesafelerini de kodlayabilmesi.
+RoPE fonksiyonunda, kelime vektörlerini "döndürmek" (rotate) için sin cos fonksiyon çifti kullanılmıştır.
+
+
+
+bağlam içinde bulunduğumuz yerde kurduğumuz cümledir veya içinde geçtiği yer göre kazandığı anlam 
+
+
+
+
 
 
 
