@@ -1054,10 +1054,57 @@ bağlam içinde bulunduğumuz yerde kurduğumuz cümledir veya içinde geçtiği
 
 
 
+-----
+n8n self hosted :
+- starter kit  https://github.com/n8n-io/self-hosted-ai-starter-kit
+- ollama -llm
+öğren.
 
+https://www.youtube.com/watch?v=huaCsAs02xY n8n hk. somut bir örnek teşkil ettiğini düşünüyorum. 
 
+----
 
+n8n Starter Kit ve Ollama LLM entegrasyonu için en kapsamlı kaynaklar:
 
+## n8n AI Starter Kit Kaynakları
+
+**Resmi Kaynaklar:**
+- **GitHub Repository:** n8n-io/self-hosted-ai-starter-kit - Açık kaynak template
+- **Resmi Dokümantasyon:** n8n.io/hosting/starter-kits/ai-starter-kit/
+- **Hızlı Başlangıç:** n8n.io/try-it-out/quickstart/
+- **AI Workflow Tutorial:** n8n.io/advanced-ai/intro-tutorial/
+- **Learning Path:** n8n.io/learning-path/
+- **Advanced AI Docs:** n8n.io/advanced-ai/
+
+**Video ve Pratik Kaynaklar:**
+- **Starter Kit Tutorial Video:** community.n8n.io/t/self-hosted-ai-starter-kit-tutorial/62465
+- **Pratik Örnek (Medium):** A practical n8n workflow example from A to Z
+
+## Ollama + n8n Entegrasyon Kaynakları
+
+**Resmi Dokümantasyon:**
+- **Ollama Model Node:** n8n.io/integrations/builtin/cluster-nodes/.../lmollama/
+- **Ollama Credentials:** n8n.io/integrations/builtin/credentials/ollama/
+- **Common Issues:** Ollama Model node troubleshooting
+
+**Kapsamlı Rehberler:**
+- **Hostinger Tutorial:** n8n-ollama integration detaylı rehber
+- **Docker Guide:** n8n with Ollama LLM Locally Using Docker
+- **Medium Tutorial:** n8n ve Ollama pipeline kurulumu
+- **Advanced Integration:** Aleksandar Haber'in kapsamlı rehberi
+
+**Hazır Workflow Şablonları:**
+- **Chat Template:** Chat with local LLMs using n8n and Ollama
+- **AI Agent Template:** Weather ve Wikipedia agent örneği
+
+## Önerilen Öğrenme Sırası:
+
+1. **Temel n8n:** n8n quickstart ve learning path'i tamamlayın
+2. **AI Starter Kit:** GitHub repo'yu klonlayıp kurulum yapın
+3. **Ollama Kurulum:** Yerel Ollama instance'ını çalıştırın
+4. **Entegrasyon:** Docker rehberini takip ederek bağlantı kurun
+5. **Pratik:** Hazır workflow şablonlarını test edin
+6. **Gelişmiş:** Kendi AI agent'larınızı geliştirin
 
 
 
