@@ -1112,11 +1112,56 @@ n8n Starter Kit ve Ollama LLM entegrasyonu için en kapsamlı kaynaklar:
 
 
 
+```bash
+brew install --cask docker
+```
+
+Kurulum bittikten sonra:
+
+1. **Docker Desktop'u başlatın:**
+```bash
+open /Applications/Docker.app
+```
+
+2. **Docker'ın çalıştığını kontrol edin:**
+```bash
+docker --version
+```
+
+3. **Ardından n8n kurulumuna devam edin:**
+
+```bash
+# Ollama'yı arka planda çalıştır
+ollama serve &
+
+# .env dosyasını kontrol et
+cat .env
+
+# Docker Compose'u başlat
+docker compose up
+```
+Kurulum bittikten sonra http://localhost:5678 adresinden n8n'e erişebileceksiniz.
 
 
 
+Docker kurduktan sonra:
 
+Ollama'yı arka planda başlatın:
 
+bashollama serve &
+
+.env dosyasını kontrol edin:
+
+bashcat .env
+OLLAMA_HOST=host.docker.internal:11434 satırının olduğundan emin olun.
+
+Docker Compose'u çalıştırın:
+
+bashdocker compose up
+
+Llama3.2 kurun (opsiyonel ama önerilen):
+
+bashollama pull llama3.2
 
 
 
